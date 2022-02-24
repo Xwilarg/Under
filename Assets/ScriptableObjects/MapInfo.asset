@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: MapInfo
   m_EditorClassIdentifier: 
   MapSize: 21
+  WallPrefab: {fileID: 5402741190404535408, guid: 58f3fd14a93dba54e86b87df6df9893c, type: 3}

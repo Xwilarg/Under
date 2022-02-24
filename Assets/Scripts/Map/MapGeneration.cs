@@ -12,6 +12,7 @@ namespace VarVarGamejam.Map
         private MapInfo _info;
 
         private TileType[][] _map;
+        private readonly List<GameObject> _walls = new();
 
         private void Start()
         {
@@ -61,7 +62,7 @@ namespace VarVarGamejam.Map
                     Dir = -dir
                 });
             }
-            _map[mid][mid] = TileType.Entrance;
+            _map[mid][mid] = TileType.Empty;
 
             // Prim algorithm implementation
             while (pending.Any())
@@ -105,14 +106,24 @@ namespace VarVarGamejam.Map
                 }
             }
 
+            // Add entrance
+            var s = (_info.MapSize - 3) / 2;
+            var posEntrance = (Random.Range(0, s) * 2) + 1;
+            var posExit = (Random.Range(0, s) * 2) + 1;
+
+            _map[0][posEntrance] = TileType.Entrance;
+            _map[_info.MapSize - 1][posExit] = TileType.Exit;
+
             // Once we are done, we replace unused "corridors" by walls
             for (int y = 0; y < _info.MapSize; y++)
             {
                 for (int x = 0; x < _info.MapSize; x++)
                 {
-                    if (_map[y][x] == TileType.Pending)
+                    if (_map[y][x] == TileType.Pending || _map[y][x] == TileType.Wall)
                     {
                         _map[y][x] = TileType.Wall;
+                        var go = Instantiate(_info.WallPrefab, new Vector3(x, 0f, y), Quaternion.identity);
+                        _walls.Add(go);
                     }
                 }
             }
@@ -129,11 +140,8 @@ namespace VarVarGamejam.Map
             public Vector2Int Dir;
         }
 
-        private enum Direction
-        {
-            Left, Right, Up, Down
-        }
-
+        // Uncomment for debug
+        /*
         private void OnDrawGizmos()
         {
             if (_map == null)
@@ -155,6 +163,7 @@ namespace VarVarGamejam.Map
                 }
             }
         }
+        */
     }
 
 }

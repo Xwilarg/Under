@@ -2,9 +2,11 @@
 {
     public enum TileType
     {
-        Pending,
+        Pending, // Only used during map generation
+
         Empty,
+        Wall,
         Entrance,
-        Wall
+        Exit
     }
 }
