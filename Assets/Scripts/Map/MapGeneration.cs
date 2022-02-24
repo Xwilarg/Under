@@ -57,18 +57,32 @@ namespace VarVarGamejam.Map
             {
                 pending.Add(new Vector2Int(mid + dir.y * 2, mid + dir.x * 2));
             }
-            _map[mid][mid] = TileType.Empty;
+            _map[mid][mid] = TileType.Entrance;
 
             // Prim algorithm implementation
-            while (pending.Any())
+            var it = 0;
+            while (it < 10)
+            //while (pending.Any())
             {
-                var rand = pending[Random.Range(0, pending.Count)];
+                it++;
+                // Get random tile and remove it from the list
+                var pIndex = Random.Range(0, pending.Count);
+                var rand = pending[pIndex];
+                Debug.Log($"Doing stuff at position {rand}");
+                pending.RemoveAt(pIndex);
+
                 _map[rand.y][rand.x] = TileType.Empty; // Current room
 
                 List<Vector2Int> availableDirs = new(allDirs);
                 // Remove positions that doesn't lead to an empty space
                 // TODO: keep track of previous pos to avoid loops in maze
-                availableDirs.RemoveAll(x => _map[rand.x + x.y * 2][rand.y + x.x * 2] == TileType.Empty);
+                availableDirs.RemoveAll(x =>
+                {
+                    var px = rand.x + x.x * 2;
+                    var py = rand.y + x.y * 2;
+                    return _map[py][px] != TileType.Empty && _map[py][px] != TileType.Entrance;
+                });
+                Debug.Log($"List of available positions: {string.Join(", ", availableDirs)}");
                 var dir = availableDirs[Random.Range(0, availableDirs.Count)];
                 var pos = rand + dir * 2;
                 _map[rand.y + dir.y][rand.x + dir.x] = TileType.Empty; // Corridor
@@ -80,13 +94,13 @@ namespace VarVarGamejam.Map
                     // Check if position is valid
                     if (newY <= 0 || newX <= 0 || newY >= _info.MapSize - 1 || newX >= _info.MapSize - 1)
                     {
+                        Debug.Log("Invalid pos");
                         continue;
                     }
 
-                    var newPos = new Vector2Int(newY, newX);
-                    if (_map[newPos.y][newPos.x] == TileType.Pending)
+                    if (_map[newY][newX] == TileType.Pending)
                     {
-                        pending.Add(newPos);
+                        pending.Add(new(newY, newX));
                     }
                 }
             }
