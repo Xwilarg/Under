@@ -60,15 +60,11 @@ namespace VarVarGamejam.Map
             _map[mid][mid] = TileType.Entrance;
 
             // Prim algorithm implementation
-            var it = 0;
-            while (it < 10)
-            //while (pending.Any())
+            while (pending.Any())
             {
-                it++;
                 // Get random tile and remove it from the list
                 var pIndex = Random.Range(0, pending.Count);
                 var rand = pending[pIndex];
-                Debug.Log($"Doing stuff at position {rand}");
                 pending.RemoveAt(pIndex);
 
                 _map[rand.y][rand.x] = TileType.Empty; // Current room
@@ -80,30 +76,38 @@ namespace VarVarGamejam.Map
                 {
                     var px = rand.x + x.x * 2;
                     var py = rand.y + x.y * 2;
+                    if (IsOutOfBounds(py, px, _info.MapSize))
+                    {
+                        return true;
+                    }
                     return _map[py][px] != TileType.Empty && _map[py][px] != TileType.Entrance;
                 });
-                Debug.Log($"List of available positions: {string.Join(", ", availableDirs)}");
                 var dir = availableDirs[Random.Range(0, availableDirs.Count)];
                 var pos = rand + dir * 2;
                 _map[rand.y + dir.y][rand.x + dir.x] = TileType.Empty; // Corridor
                 foreach (var d in allDirs)
                 {
-                    var newY = pos.y + d.y * 2;
-                    var newX = pos.x + d.x * 2;
+                    var newY = rand.y + d.y * 2;
+                    var newX = rand.x + d.x * 2;
 
                     // Check if position is valid
-                    if (newY <= 0 || newX <= 0 || newY >= _info.MapSize - 1 || newX >= _info.MapSize - 1)
+                    if (IsOutOfBounds(newY, newX, _info.MapSize))
                     {
-                        Debug.Log("Invalid pos");
+                        //Debug.Log("Invalid pos");
                         continue;
                     }
 
                     if (_map[newY][newX] == TileType.Pending)
                     {
-                        pending.Add(new(newY, newX));
+                        pending.Add(new(newX, newY));
                     }
                 }
             }
+        }
+
+        private bool IsOutOfBounds(int y, int x, int size)
+        {
+            return y <= 0 || x <= 0 || y >= size - 1 || x >= size - 1;
         }
 
         private enum Direction
