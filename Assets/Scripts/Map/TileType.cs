@@ -3,7 +3,6 @@
     public enum TileType
     {
         Pending,
-        PendingWall,
         Empty,
         Entrance,
         Wall
