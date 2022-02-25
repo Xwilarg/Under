@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b6ce71101eee6b40bdf9f0889367e41, type: 3}
   m_Name: PlayerInfo
   m_EditorClassIdentifier: 
-  HorizontalLookMultiplier: 1
-  VerticalLookMultiplier: 1
+  HorizontalLookMultiplier: 0.1
+  VerticalLookMultiplier: 0.1
   ForceMultiplier: 0.1
   SpeedRunningMultiplicator: 2
   JumpForce: 2

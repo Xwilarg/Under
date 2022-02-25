@@ -20,6 +20,7 @@ namespace VarVarGamejam.Player
         private void Start()
         {
             _controller = GetComponent<CharacterController>();
+            Cursor.lockState = CursorLockMode.Locked;
         }
 
         private void FixedUpdate()
