@@ -1,0 +1,94 @@
+{
+    "name": "CameraControls",
+    "maps": [
+        {
+            "name": "PlayerCamera",
+            "id": "863715fd-bc66-485e-939f-6bad7c5d2a90",
+            "actions": [
+                {
+                    "name": "2DTopView",
+                    "type": "Button",
+                    "id": "8accdd62-b7d7-4c95-a440-2804cd35ac2b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "2DPlayerView",
+                    "type": "Button",
+                    "id": "56f28a0a-1201-4038-aee2-aa99a33e231b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "3DPlayerView",
+                    "type": "Button",
+                    "id": "cecbf510-22b4-496b-85aa-e931531521cc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Horizontal",
+                    "type": "Value",
+                    "id": "6efc58a0-5c44-4c36-af53-09a7ac225ac2",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "63d5d741-e31b-4fa4-bed4-39fd41b46142",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "2DTopView",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2d2feb52-4767-4ba0-a54b-37ef295bec57",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "2DPlayerView",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3795756c-c1c1-4dd4-a934-2178781d6901",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "3DPlayerView",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "77f2c758-6910-4396-87b8-8441ea99eef3",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Horizontal",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
