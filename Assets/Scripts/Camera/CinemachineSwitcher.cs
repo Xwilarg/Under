@@ -50,6 +50,7 @@ public class CinemachineSwitcher : MonoBehaviour
             cameraSettings.orthographic = true;
             player2D.SetActive(true);
             sourceLight.shadows = LightShadows.None;
+
         }
         else if (cameraMode == CameraMode.m_2DPlayer)
         {
