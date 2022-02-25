@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using VarVarGamejam.Map;
 using VarVarGamejam.Player.Behaviour;
 using VarVarGamejam.SO;
 
@@ -83,13 +84,23 @@ namespace VarVarGamejam.Player
                 _audioSource.PlayOneShot(clip);
                 _footstepDelay += _info.FootstepDelay * (_isSprinting ? _info.FootstepDelayRunMultiplier : 1f);
             }
+
+            // Check if the player is going backward
+            if (MapGeneration.Instance.IsGoingBackward(new Vector2Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.z))))
+            {
+                Debug.Break();
+            }
         }
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Goal") && _playerBehaviour == _topDownControls)
             {
+                // We are near goal, switch to TPS camera
                 SwitchProfile(_tpsControls);
+
+                // Now that the user, we introduce the notion that he can't go back
+                MapGeneration.Instance.EnableBackwardPrevention();
             }
         }
 

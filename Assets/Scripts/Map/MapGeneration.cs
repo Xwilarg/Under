@@ -8,6 +8,8 @@ namespace VarVarGamejam.Map
 {
     public class MapGeneration : MonoBehaviour
     {
+        public static MapGeneration Instance;
+
         [SerializeField]
         private MapInfo _info;
 
@@ -17,13 +19,44 @@ namespace VarVarGamejam.Map
         private TileType[][] _map;
         private readonly List<GameObject> _walls = new();
 
+        private Vector2Int? _cache;
+        private bool _canGoBackward;
+
+        private void Awake()
+        {
+            Instance = this;
+        }
+
         private void Start()
         {
             Generate();
         }
 
+        public bool IsGoingBackward(Vector2Int pos)
+        {
+            if (_canGoBackward || (_cache != null && _cache == pos))
+            {
+                return false;
+            }
+            if (_map[pos.y][pos.x] == TileType.EmptyTaken)
+            {
+                return true;
+            }
+            _map[pos.y][pos.x] = TileType.EmptyTaken;
+            _cache = pos;
+            return false;
+        }
+
+        public void EnableBackwardPrevention()
+        {
+            _canGoBackward = false;
+        }
+
         private void Generate()
         {
+            _cache = null;
+            _canGoBackward = true;
+
             foreach (var wall in _walls)
             {
                 Destroy(wall);
@@ -172,30 +205,24 @@ namespace VarVarGamejam.Map
             public Vector2Int Dir;
         }
 
-        // Uncomment for debug
-        /*
         private void OnDrawGizmos()
         {
             if (_map == null)
             {
                 return;
             }
+            Gizmos.color = new(1f, 0f, 0f, .2f);
             for (int y = 0; y < _info.MapSize; y++)
             {
                 for (int x = 0; x < _info.MapSize; x++)
                 {
-                    Gizmos.color = _map[y][x] switch
+                    if (_map[y][x] == TileType.EmptyTaken)
                     {
-                        TileType.Entrance => Color.green,
-                        TileType.Empty => Color.white,
-                        TileType.Wall => Color.black,
-                        _ => Color.red
-                    };
-                    Gizmos.DrawCube(new Vector3(x, 0f, y), Vector3.one);
+                        Gizmos.DrawCube(new Vector3(x, 0f, y), Vector3.one);
+                    }
                 }
             }
         }
-        */
     }
 
 }
