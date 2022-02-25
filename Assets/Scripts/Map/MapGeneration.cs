@@ -131,10 +131,13 @@ namespace VarVarGamejam.Map
                         TileType.Pending => true,
                         _ => false
                     };
-                    _map[y][x] = TileType.Wall;
                     var go = Instantiate(isWall ? _info.WallPrefab : _info.FloorPrefab, new Vector3(x, (isWall ? .5f : 0f), y), Quaternion.identity);
                     go.transform.parent = wallParent.transform;
-                    _walls.Add(go);
+                    if (isWall)
+                    {
+                        _map[y][x] = TileType.Wall;
+                        _walls.Add(go);
+                    }
                 }
             }
         }
