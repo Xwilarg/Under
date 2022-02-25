@@ -143,8 +143,9 @@ namespace VarVarGamejam.Map
             var floor = Instantiate(_info.FloorPrefab, new Vector3(floorPos, 0f, floorPos), Quaternion.identity);
             floor.transform.localScale = new Vector3(_info.MapSize / 10f, 1f, _info.MapSize / 10f);
 
-            // Spawn player at the entrance
+            // Spawn player and goal
             Instantiate(_playerPrefab, new Vector3(posEntrance, .5f, 0f), Quaternion.identity);
+            Instantiate(_info.GoalPrefab, new Vector3(posExit, _info.GoalPrefab.transform.localScale.y / 2f, _info.MapSize - 1), Quaternion.identity);
         }
 
         private bool IsOutOfBounds(int y, int x, int size)
