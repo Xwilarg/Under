@@ -4,6 +4,9 @@
 # Packages
 /[Aa]ssets/TextMesh Pro/
 /[Aa]ssets/TextMesh Pro.meta
+/[Aa]ssets/Plugins/*.dll
+/[Aa]ssets/Plugins/*.dll.meta
+Packages/
 
 # Ignore bank files in the StreamingAssets folder.
 /[Aa]ssets/StreamingAssets/**/*.bank
