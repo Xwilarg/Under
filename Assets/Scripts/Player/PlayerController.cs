@@ -36,7 +36,6 @@ namespace VarVarGamejam.Player
 			moveDir.x = desiredMove.x * _info.ForceMultiplier * (_isSprinting ? _info.SpeedRunningMultiplicator : 1f);
 			moveDir.z = desiredMove.z * _info.ForceMultiplier * (_isSprinting ? _info.SpeedRunningMultiplicator : 1f);
 
-
 			if (_controller.isGrounded && _verticalSpeed < 0f) // We are on the ground and not jumping
 			{
 				moveDir.y = -.1f; // Stick to the ground
