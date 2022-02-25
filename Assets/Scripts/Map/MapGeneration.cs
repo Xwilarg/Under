@@ -19,6 +19,17 @@ namespace VarVarGamejam.Map
 
         private void Start()
         {
+            Generate();
+        }
+
+        private void Generate()
+        {
+            foreach (var wall in _walls)
+            {
+                Destroy(wall);
+            }
+            _walls.Clear();
+
             Assert.AreEqual(1, _info.MapSize % 2, "Map size must be an odd number");
             Assert.IsTrue(_info.MapSize >= 5, "Map size must be bigger than 4");
 
@@ -146,6 +157,8 @@ namespace VarVarGamejam.Map
             // Spawn player and goal
             Instantiate(_playerPrefab, new Vector3(posEntrance, .5f, 0f), Quaternion.identity);
             Instantiate(_info.GoalPrefab, new Vector3(posExit, _info.GoalPrefab.transform.localScale.y / 2f, _info.MapSize - 1), Quaternion.identity);
+            _walls.Add(Instantiate(_info.WallPrefab, new Vector3(posEntrance, .5f, -1f), Quaternion.identity));
+            _walls.Add(Instantiate(_info.WallPrefab, new Vector3(posExit, .5f, _info.MapSize), Quaternion.identity));
         }
 
         private bool IsOutOfBounds(int y, int x, int size)
