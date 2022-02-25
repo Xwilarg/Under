@@ -10,5 +10,8 @@ namespace VarVarGamejam.SO
 
         [Tooltip("Prefab used for walls and floors")]
         public GameObject WallPrefab, FloorPrefab, GoalPrefab;
+
+        [Tooltip("When trapping the player, time for a wall to go up/down")]
+        public float TimerWall;
     }
 }
