@@ -11,11 +11,25 @@ namespace VarVarGamejam.Map
         [SerializeField]
         private MapInfo _info;
 
+        [SerializeField]
+        private GameObject _playerPrefab;
+
         private TileType[][] _map;
         private readonly List<GameObject> _walls = new();
 
         private void Start()
         {
+            Generate();
+        }
+
+        private void Generate()
+        {
+            foreach (var wall in _walls)
+            {
+                Destroy(wall);
+            }
+            _walls.Clear();
+
             Assert.AreEqual(1, _info.MapSize % 2, "Map size must be an odd number");
             Assert.IsTrue(_info.MapSize >= 5, "Map size must be bigger than 4");
 
@@ -106,27 +120,45 @@ namespace VarVarGamejam.Map
                 }
             }
 
-            // Add entrance
+            // Add entrance and exit
             var s = (_info.MapSize - 3) / 2;
             var posEntrance = (Random.Range(0, s) * 2) + 1;
             var posExit = (Random.Range(0, s) * 2) + 1;
-
             _map[0][posEntrance] = TileType.Entrance;
             _map[_info.MapSize - 1][posExit] = TileType.Exit;
 
+            var wallParent = new GameObject("Map");
             // Once we are done, we replace unused "corridors" by walls
             for (int y = 0; y < _info.MapSize; y++)
             {
                 for (int x = 0; x < _info.MapSize; x++)
                 {
-                    if (_map[y][x] == TileType.Pending || _map[y][x] == TileType.Wall)
+                    var isWall = _map[y][x] switch
                     {
+                        TileType.Wall => true,
+                        TileType.Pending => true,
+                        _ => false
+                    };
+                    if (isWall)
+                    {
+                        var go = Instantiate(_info.WallPrefab, new Vector3(x, .5f, y), Quaternion.identity);
+                        go.transform.parent = wallParent.transform;
                         _map[y][x] = TileType.Wall;
-                        var go = Instantiate(_info.WallPrefab, new Vector3(x, 0f, y), Quaternion.identity);
                         _walls.Add(go);
                     }
                 }
             }
+
+            // Spawn floor
+            var floorPos = Mathf.FloorToInt(_info.MapSize / 2f);
+            var floor = Instantiate(_info.FloorPrefab, new Vector3(floorPos, 0f, floorPos), Quaternion.identity);
+            floor.transform.localScale = new Vector3(_info.MapSize / 10f, 1f, _info.MapSize / 10f);
+
+            // Spawn player and goal
+            Instantiate(_playerPrefab, new Vector3(posEntrance, .5f, 0f), Quaternion.identity);
+            Instantiate(_info.GoalPrefab, new Vector3(posExit, _info.GoalPrefab.transform.localScale.y / 2f, _info.MapSize - 1), Quaternion.identity);
+            _walls.Add(Instantiate(_info.WallPrefab, new Vector3(posEntrance, .5f, -1f), Quaternion.identity));
+            _walls.Add(Instantiate(_info.WallPrefab, new Vector3(posExit, .5f, _info.MapSize), Quaternion.identity));
         }
 
         private bool IsOutOfBounds(int y, int x, int size)
