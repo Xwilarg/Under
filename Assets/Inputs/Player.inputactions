@@ -893,34 +893,6 @@
                     "isPartOfComposite": false
                 }
             ]
-        },
-        {
-            "name": "CameraView",
-            "id": "b3684261-4f26-4589-91bd-eb417f59a6f9",
-            "actions": [
-                {
-                    "name": "2DTopView",
-                    "type": "Button",
-                    "id": "088f7ef0-2b1d-4d98-993e-bbe117bd6181",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "5dd60718-2a9b-4817-bfa0-5ca4fdd14d21",
-                    "path": "<Keyboard>/1",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "2DTopView",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
         }
     ],
     "controlSchemes": [
