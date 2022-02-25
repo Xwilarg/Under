@@ -8,20 +8,28 @@ namespace VarVarGamejam.Player.Behaviour
         private Transform _me, _head;
         private float _headRotation;
         private PlayerInfo _info;
-        private Vector2 _groundMovement = Vector2.zero;
 
-        public ThirdPersonBehaviour(Transform me, Transform head, PlayerInfo info)
+        public Vector2 Movement { private set; get; }
+
+        public GameObject TargetCamera { private set; get; }
+
+        public ThirdPersonBehaviour(Transform me, Transform head, PlayerInfo info, GameObject camera)
         {
             _me = me;
             _head = head;
             _info = info;
+            TargetCamera = camera;
         }
 
-        public Vector2 Movement => _groundMovement;
+        public void Enable()
+        { }
+
+        public void Disable()
+        { }
 
         public void OnKeyboardInput(Vector2 input)
         {
-            _groundMovement = input;
+            Movement = input;
         }
 
         public void OnMouseMove(Vector2 mousePos)

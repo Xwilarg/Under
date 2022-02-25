@@ -12,7 +12,9 @@ namespace VarVarGamejam.Player
         [SerializeField]
         private PlayerInfo _info;
         [SerializeField]
-        private Transform _head;
+        private Transform _head, _body;
+        [SerializeField]
+        private GameObject _tpsCamera, _topDownCamera;
 
         private List<AudioClip> _footstepsWalk, _footstepsRun;
 
@@ -34,10 +36,10 @@ namespace VarVarGamejam.Player
             _footstepsWalk = _info.FootstepsWalk.ToList();
             _footstepsRun = _info.FootstepsRun.ToList();
 
-            _tpsControls = new ThirdPersonBehaviour(transform, _head, _info);
-            _topDownControls = new TopDownBehaviour();
+            _tpsControls = new ThirdPersonBehaviour(transform, _head, _info, _tpsCamera);
+            _topDownControls = new TopDownBehaviour(_body, _topDownCamera);
 
-            _playerBehaviour = _tpsControls;
+            SwitchProfile(_topDownControls);
         }
 
         private void FixedUpdate()
@@ -83,6 +85,18 @@ namespace VarVarGamejam.Player
             }
         }
 
+        private void SwitchProfile(IPlayerBehaviour target)
+        {
+            _playerBehaviour?.Disable();
+
+            _tpsCamera.SetActive(false);
+            _topDownCamera.SetActive(false);
+            target.TargetCamera.SetActive(true);
+            _playerBehaviour = target;
+
+            _playerBehaviour.Enable();
+        }
+
 		public void OnMovement(InputAction.CallbackContext value)
         {
             _playerBehaviour.OnKeyboardInput(value.ReadValue<Vector2>().normalized);
@@ -109,7 +123,7 @@ namespace VarVarGamejam.Player
 
         public void ChangeView(InputAction.CallbackContext value)
         {
-            _playerBehaviour = _playerBehaviour == _tpsControls ? _topDownControls : _tpsControls;
+            SwitchProfile(_playerBehaviour == _tpsControls ? _topDownControls : _tpsControls);
         }
     }
 }
