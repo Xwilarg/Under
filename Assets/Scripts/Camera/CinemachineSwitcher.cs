@@ -21,7 +21,6 @@ public class CinemachineSwitcher : MonoBehaviour
     [SerializeField]
     private Light sourceLight;
 
-
     [System.Serializable]
     public enum CameraMode
     {
