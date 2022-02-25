@@ -25,7 +25,7 @@ namespace VarVarGamejam.Map
 
         private GameObject _wallParent;
 
-        private List<GameObject> _playerTrap = new();
+        private readonly List<ObjPos> _playerTrap = new();
         private readonly Timer _trapTimer = new();
 
         private readonly List<Vector2Int> _allDirs = new()
@@ -79,7 +79,7 @@ namespace VarVarGamejam.Map
             {
                 if (_map[pos.y + dir.y][pos.x + dir.x] == TileType.Empty || _map[pos.y + dir.y][pos.x + dir.x] == TileType.EmptyTaken)
                 {
-                    _playerTrap.Add(Instantiate(_info.WallPrefab, new Vector3(pos.x + dir.x, .5f, pos.y + dir.y), Quaternion.identity));
+                    _playerTrap.Add(new(pos + dir, Instantiate(_info.WallPrefab, new Vector3(pos.x + dir.x, .5f, pos.y + dir.y), Quaternion.identity)));
                 }
             }
 
@@ -102,7 +102,7 @@ namespace VarVarGamejam.Map
             // Remove "player cage"
             foreach (var wall in _playerTrap)
             {
-                Destroy(wall);
+                Destroy(wall.Obj);
             }
             _playerTrap.Clear();
         }
@@ -112,7 +112,7 @@ namespace VarVarGamejam.Map
             _trapTimer.Update(Time.deltaTime);
             foreach (var wall in _playerTrap)
             {
-                wall.transform.position = new Vector3(wall.transform.position.x, -.5f + _trapTimer.Lerp(1f), wall.transform.position.z);
+                wall.Obj.transform.position = new Vector3(wall.Obj.transform.position.x, -.5f + _trapTimer.Lerp(1f), wall.Obj.transform.position.z);
             }
         }
 
@@ -225,6 +225,12 @@ namespace VarVarGamejam.Map
                         }
                         else
                         {
+                            var matchingTrap = _playerTrap.FirstOrDefault(t => t.Pos.x == x && t.Pos.y == y);
+                            if (matchingTrap != null) // There is already a wall here so we just replace it
+                            {
+                                Destroy(matchingTrap.Obj);
+                                _playerTrap.Remove(matchingTrap);
+                            }
                             var go = Instantiate(_info.WallPrefab, new Vector3(x, .5f, y), Quaternion.identity);
                             go.transform.parent = _wallParent.transform;
                             _map[y][x] = TileType.Wall;
