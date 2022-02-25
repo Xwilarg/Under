@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -8,7 +9,7 @@ namespace VarVarGamejam.Map
 {
     public class MapGeneration : MonoBehaviour
     {
-        public static MapGeneration Instance;
+        public static MapGeneration Instance { get; private set; }
 
         [SerializeField]
         private MapInfo _info;
@@ -22,6 +23,16 @@ namespace VarVarGamejam.Map
         private Vector2Int? _cache;
         private bool _canGoBackward;
 
+        private GameObject _wallParent;
+
+        private readonly List<Vector2Int> _allDirs = new()
+        {
+            Vector2Int.left,
+            Vector2Int.right,
+            Vector2Int.up,
+            Vector2Int.down
+        };
+
         private void Awake()
         {
             Instance = this;
@@ -29,7 +40,11 @@ namespace VarVarGamejam.Map
 
         private void Start()
         {
-            Generate();
+            Assert.AreEqual(1, _info.MapSize % 2, "Map size must be an odd number");
+            Assert.IsTrue(_info.MapSize >= 5, "Map size must be bigger than 4");
+
+            _wallParent = new GameObject("Map");
+            Generate(firstTime: true);
         }
 
         public bool IsGoingBackward(Vector2Int pos)
@@ -38,12 +53,12 @@ namespace VarVarGamejam.Map
             {
                 return false;
             }
+            _cache = pos;
             if (_map[pos.y][pos.x] == TileType.EmptyTaken)
             {
                 return true;
             }
             _map[pos.y][pos.x] = TileType.EmptyTaken;
-            _cache = pos;
             return false;
         }
 
@@ -52,8 +67,20 @@ namespace VarVarGamejam.Map
             _canGoBackward = false;
         }
 
-        private void Generate()
+        public IEnumerator Regenerate(Vector2Int pos) // TODO: Prevent wall to spawn in player
         {
+            // Add walls to prevent user to leave
+            List<GameObject> playerSecurity = new();
+            foreach (var dir in _allDirs)
+            {
+                if (_map[pos.y + dir.y][pos.x + dir.x] == TileType.Empty || _map[pos.y + dir.y][pos.x + dir.x] == TileType.EmptyTaken)
+                {
+                    playerSecurity.Add(Instantiate(_info.WallPrefab, new Vector3(pos.x + dir.x, .5f, pos.y + dir.y), Quaternion.identity));
+                }
+            }
+
+            yield return new WaitForSeconds(1f);
+
             _cache = null;
             _canGoBackward = true;
 
@@ -63,9 +90,19 @@ namespace VarVarGamejam.Map
             }
             _walls.Clear();
 
-            Assert.AreEqual(1, _info.MapSize % 2, "Map size must be an odd number");
-            Assert.IsTrue(_info.MapSize >= 5, "Map size must be bigger than 4");
+            Generate(firstTime: false);
 
+            yield return new WaitForSeconds(1f);
+
+            // Remove "player cage"
+            foreach (var wall in playerSecurity)
+            {
+                Destroy(wall);
+            }
+        }
+
+        private void Generate(bool firstTime)
+        {
             // Init map
             _map = new TileType[_info.MapSize][];
             for (int i = 0; i < _info.MapSize; i++)
@@ -91,17 +128,10 @@ namespace VarVarGamejam.Map
             }
 
             List<PosDir> pending = new();
-            List<Vector2Int> allDirs = new()
-            {
-                Vector2Int.left,
-                Vector2Int.right,
-                Vector2Int.up,
-                Vector2Int.down
-            };
 
             // Place first point
             var mid = (_info.MapSize - 1) / 2 + 1;
-            foreach (var dir in allDirs)
+            foreach (var dir in _allDirs)
             {
                 pending.Add(new()
                 {
@@ -122,7 +152,7 @@ namespace VarVarGamejam.Map
                 _map[rand.Pos.y][rand.Pos.x] = TileType.Empty; // Current room
 
                 _map[rand.Pos.y + rand.Dir.y][rand.Pos.x + rand.Dir.x] = TileType.Empty; // Corridor
-                foreach (var d in allDirs)
+                foreach (var d in _allDirs)
                 {
                     var newY = rand.Pos.y + d.y * 2;
                     var newX = rand.Pos.x + d.x * 2;
@@ -160,7 +190,6 @@ namespace VarVarGamejam.Map
             _map[0][posEntrance] = TileType.Entrance;
             _map[_info.MapSize - 1][posExit] = TileType.Exit;
 
-            var wallParent = new GameObject("Map");
             // Once we are done, we replace unused "corridors" by walls
             for (int y = 0; y < _info.MapSize; y++)
             {
@@ -175,23 +204,27 @@ namespace VarVarGamejam.Map
                     if (isWall)
                     {
                         var go = Instantiate(_info.WallPrefab, new Vector3(x, .5f, y), Quaternion.identity);
-                        go.transform.parent = wallParent.transform;
+                        go.transform.parent = _wallParent.transform;
                         _map[y][x] = TileType.Wall;
                         _walls.Add(go);
                     }
                 }
             }
 
-            // Spawn floor
-            var floorPos = Mathf.FloorToInt(_info.MapSize / 2f);
-            var floor = Instantiate(_info.FloorPrefab, new Vector3(floorPos, 0f, floorPos), Quaternion.identity);
-            floor.transform.localScale = new Vector3(_info.MapSize / 10f, 1f, _info.MapSize / 10f);
+            // The following actions shouldn't be done twice
+            if (firstTime)
+            {
+                // Spawn floor
+                var floorPos = Mathf.FloorToInt(_info.MapSize / 2f);
+                var floor = Instantiate(_info.FloorPrefab, new Vector3(floorPos, 0f, floorPos), Quaternion.identity);
+                floor.transform.localScale = new Vector3(_info.MapSize / 10f, 1f, _info.MapSize / 10f);
 
-            // Spawn player and goal
-            Instantiate(_playerPrefab, new Vector3(posEntrance, .5f, 0f), Quaternion.identity);
-            Instantiate(_info.GoalPrefab, new Vector3(posExit, _info.GoalPrefab.transform.localScale.y / 2f, _info.MapSize - 1), Quaternion.identity);
-            _walls.Add(Instantiate(_info.WallPrefab, new Vector3(posEntrance, .5f, -1f), Quaternion.identity));
-            _walls.Add(Instantiate(_info.WallPrefab, new Vector3(posExit, .5f, _info.MapSize), Quaternion.identity));
+                // Spawn player and goal
+                Instantiate(_playerPrefab, new Vector3(posEntrance, .5f, 0f), Quaternion.identity);
+                Instantiate(_info.GoalPrefab, new Vector3(posExit, _info.GoalPrefab.transform.localScale.y / 2f, _info.MapSize - 1), Quaternion.identity);
+                _walls.Add(Instantiate(_info.WallPrefab, new Vector3(posEntrance, .5f, -1f), Quaternion.identity));
+                _walls.Add(Instantiate(_info.WallPrefab, new Vector3(posExit, .5f, _info.MapSize), Quaternion.identity));
+            }
         }
 
         private bool IsOutOfBounds(int y, int x, int size)

@@ -86,9 +86,10 @@ namespace VarVarGamejam.Player
             }
 
             // Check if the player is going backward
-            if (MapGeneration.Instance.IsGoingBackward(new Vector2Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.z))))
+            var intPos = new Vector2Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.z));
+            if (MapGeneration.Instance.IsGoingBackward(intPos))
             {
-                Debug.Break();
+                StartCoroutine(MapGeneration.Instance.Regenerate(intPos));
             }
         }
 
