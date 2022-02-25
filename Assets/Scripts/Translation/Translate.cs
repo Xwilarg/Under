@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -49,7 +50,22 @@ namespace VarVarGamejam.Translation
         }
 
         private string _currentLanguage = "english";
+        public string CurrentLanguage
+        {
+            set
+            {
+                if (!_translationData.ContainsKey(value))
+                {
+                    throw new ArgumentException($"Invalid translation key {value}", nameof(value));
+                }
+                _currentLanguage = value;
+                foreach (var tt in UnityEngine.Object.FindObjectsOfType<TMP_TextTranslate>())
+                {
+                    tt.UpdateText();
+                }
+            }
+        }
 
-        private Dictionary<string, Dictionary<string, string>> _translationData = new();
+        private readonly Dictionary<string, Dictionary<string, string>> _translationData = new();
     }
 }

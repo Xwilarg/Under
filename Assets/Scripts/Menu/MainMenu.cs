@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using VarVarGamejam.Translation;
 
 namespace VarVarGamejam.Menu
 {
@@ -8,6 +9,11 @@ namespace VarVarGamejam.Menu
         public void LoadGame()
         {
             SceneManager.LoadScene("Main");
+        }
+
+        public void SetLanguage(string value)
+        {
+            Translate.Instance.CurrentLanguage = value;
         }
     }
 }
