@@ -21,9 +21,12 @@ namespace VarVarGamejam.Map
         private readonly List<GameObject> _walls = new();
 
         private Vector2Int? _cache;
-        private bool _canGoBackward;
+        private bool _canGoBackward = true;
 
         private GameObject _wallParent;
+
+        private List<GameObject> _playerTrap = new();
+        private readonly Timer _trapTimer = new();
 
         private readonly List<Vector2Int> _allDirs = new()
         {
@@ -44,12 +47,14 @@ namespace VarVarGamejam.Map
             Assert.IsTrue(_info.MapSize >= 5, "Map size must be bigger than 4");
 
             _wallParent = new GameObject("Map");
-            Generate(firstTime: true);
+            Generate(safePos: null, firstTime: true);
         }
 
         public bool IsGoingBackward(Vector2Int pos)
         {
-            if (_canGoBackward || (_cache != null && _cache == pos))
+            if (_canGoBackward || // Is backward prevention mechanism enabled yet
+                (_cache != null && _cache == pos) || // Is the player still on the same tile as before
+                (_map[pos.y][pos.x] == TileType.Exit || _map[pos.y][pos.x] == TileType.Entrance)) // Let's not stuck the player right on a goal tile!
             {
                 return false;
             }
@@ -67,22 +72,21 @@ namespace VarVarGamejam.Map
             _canGoBackward = false;
         }
 
-        public IEnumerator Regenerate(Vector2Int pos) // TODO: Prevent wall to spawn in player
+        public IEnumerator Regenerate(Vector2Int pos)
         {
             // Add walls to prevent user to leave
-            List<GameObject> playerSecurity = new();
             foreach (var dir in _allDirs)
             {
                 if (_map[pos.y + dir.y][pos.x + dir.x] == TileType.Empty || _map[pos.y + dir.y][pos.x + dir.x] == TileType.EmptyTaken)
                 {
-                    playerSecurity.Add(Instantiate(_info.WallPrefab, new Vector3(pos.x + dir.x, .5f, pos.y + dir.y), Quaternion.identity));
+                    _playerTrap.Add(Instantiate(_info.WallPrefab, new Vector3(pos.x + dir.x, .5f, pos.y + dir.y), Quaternion.identity));
                 }
             }
 
-            yield return new WaitForSeconds(1f);
+            _trapTimer.Start(_info.TimerWall, goUp: true);
+            yield return new WaitForSeconds(_info.TimerWall);
 
             _cache = null;
-            _canGoBackward = true;
 
             foreach (var wall in _walls)
             {
@@ -90,18 +94,29 @@ namespace VarVarGamejam.Map
             }
             _walls.Clear();
 
-            Generate(firstTime: false);
+            Generate(safePos: pos, firstTime: false);
 
-            yield return new WaitForSeconds(1f);
+            _trapTimer.Start(_info.TimerWall, goUp: false);
+            yield return new WaitForSeconds(_info.TimerWall);
 
             // Remove "player cage"
-            foreach (var wall in playerSecurity)
+            foreach (var wall in _playerTrap)
             {
                 Destroy(wall);
             }
+            _playerTrap.Clear();
         }
 
-        private void Generate(bool firstTime)
+        private void Update()
+        {
+            _trapTimer.Update(Time.deltaTime);
+            foreach (var wall in _playerTrap)
+            {
+                wall.transform.position = new Vector3(wall.transform.position.x, -.5f + _trapTimer.Lerp(1f), wall.transform.position.z);
+            }
+        }
+
+        private void Generate(Vector2Int? safePos, bool firstTime)
         {
             // Init map
             _map = new TileType[_info.MapSize][];
@@ -203,10 +218,18 @@ namespace VarVarGamejam.Map
                     };
                     if (isWall)
                     {
-                        var go = Instantiate(_info.WallPrefab, new Vector3(x, .5f, y), Quaternion.identity);
-                        go.transform.parent = _wallParent.transform;
-                        _map[y][x] = TileType.Wall;
-                        _walls.Add(go);
+                        if (safePos != null && safePos.Value.x == x && safePos.Value.y == y)
+                        {
+                            // When regenerating the maze, we make sure the player doesn't stay stuck in a wall
+                            _map[y][x] = TileType.Empty;
+                        }
+                        else
+                        {
+                            var go = Instantiate(_info.WallPrefab, new Vector3(x, .5f, y), Quaternion.identity);
+                            go.transform.parent = _wallParent.transform;
+                            _map[y][x] = TileType.Wall;
+                            _walls.Add(go);
+                        }
                     }
                 }
             }
