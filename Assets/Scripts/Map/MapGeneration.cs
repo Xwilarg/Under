@@ -11,6 +11,9 @@ namespace VarVarGamejam.Map
         [SerializeField]
         private MapInfo _info;
 
+        [SerializeField]
+        private GameObject _playerPrefab;
+
         private TileType[][] _map;
         private readonly List<GameObject> _walls = new();
 
@@ -106,14 +109,17 @@ namespace VarVarGamejam.Map
                 }
             }
 
-            // Add entrance
+            // Add entrance and exit
             var s = (_info.MapSize - 3) / 2;
             var posEntrance = (Random.Range(0, s) * 2) + 1;
             var posExit = (Random.Range(0, s) * 2) + 1;
-
             _map[0][posEntrance] = TileType.Entrance;
             _map[_info.MapSize - 1][posExit] = TileType.Exit;
 
+            // Spawn player at the entrance
+            Instantiate(_playerPrefab, new Vector3(0f, 0f, posEntrance), Quaternion.identity);
+
+            var wallParent = new GameObject("Map");
             // Once we are done, we replace unused "corridors" by walls
             for (int y = 0; y < _info.MapSize; y++)
             {
@@ -123,6 +129,7 @@ namespace VarVarGamejam.Map
                     {
                         _map[y][x] = TileType.Wall;
                         var go = Instantiate(_info.WallPrefab, new Vector3(x, 0f, y), Quaternion.identity);
+                        go.transform.parent = wallParent.transform;
                         _walls.Add(go);
                     }
                 }
