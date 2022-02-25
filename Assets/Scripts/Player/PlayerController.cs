@@ -3,6 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using VarVarGamejam.Map;
+using VarVarGamejam.Menu;
 using VarVarGamejam.Player.Behaviour;
 using VarVarGamejam.SO;
 
@@ -27,6 +28,9 @@ namespace VarVarGamejam.Player
 
         private IPlayerBehaviour _playerBehaviour;
         private IPlayerBehaviour _tpsControls, _topDownControls;
+
+        private bool _isGoalInHands;
+        private bool _isNearGoal;
 
         private void Start()
         {
@@ -93,15 +97,38 @@ namespace VarVarGamejam.Player
             }
         }
 
+        private void TogglePossibleGoalTake(bool value)
+        {
+            _isNearGoal = value;
+            GoalManager.Instance.ToggleTakeHelp(value);
+        }
+
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Goal") && _playerBehaviour == _topDownControls)
+            if (other.CompareTag("Goal"))
             {
-                // We are near goal, switch to TPS camera
-                SwitchProfile(_tpsControls);
+                if (_playerBehaviour == _topDownControls)
+                {
+                    // We are near goal, switch to TPS camera
+                    SwitchProfile(_tpsControls);
 
-                // Now that the user, we introduce the notion that he can't go back
-                MapGeneration.Instance.EnableBackwardPrevention();
+                    // Now that the user, we introduce the notion that he can't go back
+                    MapGeneration.Instance.EnableBackwardPrevention();
+                    TogglePossibleGoalTake(true);
+                }
+                else if (!_isGoalInHands)
+                {
+                    TogglePossibleGoalTake(true);
+
+                }
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("Goal") && _isNearGoal)
+            {
+                TogglePossibleGoalTake(false);
             }
         }
 
@@ -143,7 +170,20 @@ namespace VarVarGamejam.Player
 
         public void ChangeView(InputAction.CallbackContext value)
         {
-            SwitchProfile(_playerBehaviour == _tpsControls ? _topDownControls : _tpsControls);
+            if (value.performed)
+            {
+                SwitchProfile(_playerBehaviour == _tpsControls ? _topDownControls : _tpsControls);
+            }
+        }
+
+        public void OnAction(InputAction.CallbackContext value)
+        {
+            if (value.performed && !_isGoalInHands && _isNearGoal)
+            {
+                TogglePossibleGoalTake(false);
+                _isGoalInHands = true;
+                GoalManager.Instance.TakeObjective();
+            }
         }
     }
 }
