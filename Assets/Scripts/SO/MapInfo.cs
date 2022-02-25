@@ -8,7 +8,7 @@ namespace VarVarGamejam.SO
         [Tooltip("Full size of the map")]
         public int MapSize;
 
-        [Tooltip("Prefab used for walls")]
-        public GameObject WallPrefab;
+        [Tooltip("Prefab used for walls and floors")]
+        public GameObject WallPrefab, FloorPrefab;
     }
 }
