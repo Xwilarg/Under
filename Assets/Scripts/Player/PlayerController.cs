@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using VarVarGamejam.Player.Behaviour;
 using VarVarGamejam.SO;
 
 namespace VarVarGamejam.Player
@@ -16,12 +17,12 @@ namespace VarVarGamejam.Player
         private List<AudioClip> _footstepsWalk, _footstepsRun;
 
         private AudioSource _audioSource;
-        private float _headRotation;
-        private Vector2 _groundMovement = Vector2.zero;
 		private CharacterController _controller;
         private bool _isSprinting;
         private float _verticalSpeed;
         private float _footstepDelay;
+
+        IPlayerBehaviour _playerBehaviour;
 
         private void Start()
         {
@@ -31,11 +32,14 @@ namespace VarVarGamejam.Player
 
             _footstepsWalk = _info.FootstepsWalk.ToList();
             _footstepsRun = _info.FootstepsRun.ToList();
+
+            _playerBehaviour = new ThirdPersonBehaviour(transform, _head, _info);
         }
 
         private void FixedUpdate()
 		{
-			Vector3 desiredMove = transform.forward * _groundMovement.y + transform.right * _groundMovement.x;
+            var pos = _playerBehaviour.Movement;
+			Vector3 desiredMove = transform.forward * pos.y + transform.right * pos.x;
 
 			// Get a normal for the surface that is being touched to move along it
 			Physics.SphereCast(transform.position, _controller.radius, Vector3.down, out RaycastHit hitInfo,
@@ -56,8 +60,11 @@ namespace VarVarGamejam.Player
 				_verticalSpeed += Physics.gravity.y;
 				moveDir.y += _verticalSpeed;
 			}
+
             var p = transform.position;
 			_controller.Move(moveDir);
+
+            // Footsteps
             _footstepDelay -= Vector3.SqrMagnitude(p - transform.position);
             if (_footstepDelay < 0f)
             {
@@ -74,19 +81,13 @@ namespace VarVarGamejam.Player
 
 		public void OnMovement(InputAction.CallbackContext value)
         {
-            _groundMovement = value.ReadValue<Vector2>().normalized;
+            _playerBehaviour.OnKeyboardInput(value.ReadValue<Vector2>().normalized);
         }
 
         public void OnLook(InputAction.CallbackContext value)
         {
             var rot = value.ReadValue<Vector2>();
-
-            transform.rotation *= Quaternion.AngleAxis(rot.x * _info.HorizontalLookMultiplier, Vector3.up);
-
-            _headRotation -= rot.y * _info.VerticalLookMultiplier; // Vertical look is inverted by default, hence the -=
-
-            _headRotation = Mathf.Clamp(_headRotation, -89, 89);
-            _head.transform.localRotation = Quaternion.AngleAxis(_headRotation, Vector3.right);
+            _playerBehaviour.OnMouseMove(rot);
         }
 
         public void OnJump(InputAction.CallbackContext value)
