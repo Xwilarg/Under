@@ -16,7 +16,7 @@ namespace VarVarGamejam.SO
         [Range(0f, 10f)]
         [Tooltip("Speed of the player")]
         public float ForceMultiplier = 1f;
-        [Range(1f, 10f)]
+        [Range(0f, 10f)]
         [Tooltip("Speed multiplicator when the player is running")]
         public float SpeedRunningMultiplicator;
         [Range(1f, 10f)]

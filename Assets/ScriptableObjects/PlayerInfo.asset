@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HorizontalLookMultiplier: 0.1
   VerticalLookMultiplier: 0.1
-  ForceMultiplier: 0.1
+  ForceMultiplier: 0.05
   SpeedRunningMultiplicator: 2
   JumpForce: 2
-  FootstepDelay: 0.18
+  FootstepDelay: 0.04
   FootstepDelayRunMultiplier: 3
   FootstepsWalk:
   - {fileID: 8300000, guid: 02a5742779274b44a8ca62d1d17b04b8, type: 3}
