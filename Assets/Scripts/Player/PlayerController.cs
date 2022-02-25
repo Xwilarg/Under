@@ -73,5 +73,10 @@ namespace VarVarGamejam.Player
                 _verticalSpeed = _info.JumpForce;
             }
         }
+
+        public void OnSprint(InputAction.CallbackContext value)
+        {
+            _isSprinting = value.ReadValueAsButton();
+        }
     }
 }

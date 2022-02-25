@@ -40,6 +40,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Sprint",
+                    "type": "Button",
+                    "id": "d6d4e555-e13a-42ac-8c26-efbb582b64bb",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -287,12 +296,23 @@
                 },
                 {
                     "name": "",
-                    "id": "d921565c-09d4-4713-bb5c-c5644e8e42d9",
-                    "path": "<Gamepad>/dpad/down",
+                    "id": "b751678a-c8f9-4a53-8cc1-16cd158e5f4a",
+                    "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Joystick",
-                    "action": "Jump",
+                    "groups": "Gamepad",
+                    "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "85039348-91d8-4f83-9350-b9f14de8abab",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Sprint",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
