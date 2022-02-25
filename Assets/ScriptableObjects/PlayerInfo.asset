@@ -17,3 +17,17 @@ MonoBehaviour:
   ForceMultiplier: 0.1
   SpeedRunningMultiplicator: 2
   JumpForce: 2
+  FootstepDelay: 0.18
+  FootstepDelayRunMultiplier: 3
+  FootstepsWalk:
+  - {fileID: 8300000, guid: 02a5742779274b44a8ca62d1d17b04b8, type: 3}
+  - {fileID: 8300000, guid: 48495738a86a86f4c8ac764cd7f3c5fb, type: 3}
+  - {fileID: 8300000, guid: 1e4ebfb3360ab6740a4bae26110265cf, type: 3}
+  - {fileID: 8300000, guid: dd89e55ea9e863941b8dbbe66eb3de2b, type: 3}
+  - {fileID: 8300000, guid: 8454f3824935573418f17aa25298d1d8, type: 3}
+  FootstepsRun:
+  - {fileID: 8300000, guid: 41ca62639115ca74da60e766990280e1, type: 3}
+  - {fileID: 8300000, guid: d69913d1e54a2b04db2d9fd29449b371, type: 3}
+  - {fileID: 8300000, guid: 06d1955c3f61a514c95ab9b7bff462ce, type: 3}
+  - {fileID: 8300000, guid: 97fb520300b21304c8c4fab445dae475, type: 3}
+  - {fileID: 8300000, guid: c5c4d70f3583c2a4f9b2ce1bee1615cd, type: 3}

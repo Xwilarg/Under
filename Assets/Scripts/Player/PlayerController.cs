@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using VarVarGamejam.SO;
@@ -11,16 +13,24 @@ namespace VarVarGamejam.Player
         [SerializeField]
         private Transform _head;
 
+        private List<AudioClip> _footstepsWalk, _footstepsRun;
+
+        private AudioSource _audioSource;
         private float _headRotation;
         private Vector2 _groundMovement = Vector2.zero;
 		private CharacterController _controller;
         private bool _isSprinting;
         private float _verticalSpeed;
+        private float _footstepDelay;
 
         private void Start()
         {
+            _audioSource = GetComponent<AudioSource>();
             _controller = GetComponent<CharacterController>();
             Cursor.lockState = CursorLockMode.Locked;
+
+            _footstepsWalk = _info.FootstepsWalk.ToList();
+            _footstepsRun = _info.FootstepsRun.ToList();
         }
 
         private void FixedUpdate()
@@ -46,8 +56,21 @@ namespace VarVarGamejam.Player
 				_verticalSpeed += Physics.gravity.y;
 				moveDir.y += _verticalSpeed;
 			}
+            var p = transform.position;
 			_controller.Move(moveDir);
-		}
+            _footstepDelay -= Vector3.SqrMagnitude(p - transform.position);
+            if (_footstepDelay < 0f)
+            {
+                var target = _isSprinting ? _footstepsRun : _footstepsWalk;
+                var clipIndex = Random.Range(1, target.Count);
+                var clip = target[clipIndex];
+                target.RemoveAt(clipIndex);
+                target.Insert(0, clip);
+
+                _audioSource.PlayOneShot(clip);
+                _footstepDelay += _info.FootstepDelay * (_isSprinting ? _info.FootstepDelayRunMultiplier : 1f);
+            }
+        }
 
 		public void OnMovement(InputAction.CallbackContext value)
         {
