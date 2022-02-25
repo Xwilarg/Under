@@ -85,6 +85,14 @@ namespace VarVarGamejam.Player
             }
         }
 
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Goal") && _playerBehaviour == _topDownControls)
+            {
+                SwitchProfile(_tpsControls);
+            }
+        }
+
         private void SwitchProfile(IPlayerBehaviour target)
         {
             _playerBehaviour?.Disable();
