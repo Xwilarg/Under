@@ -49,6 +49,33 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "2DTopView",
+                    "type": "Button",
+                    "id": "d7e7d38b-cf9d-453d-b7f6-243b26e8778b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "2DPlayerView",
+                    "type": "Button",
+                    "id": "4b5a5a7f-e4ce-4133-a5be-41a479c6d615",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "3DPlayerView",
+                    "type": "Button",
+                    "id": "bcf27b4a-4d7a-4536-9702-6acc9f22155e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -313,6 +340,39 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dc1cdc56-0852-41c5-9ee8-3b66d7e9748c",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "2DPlayerView",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e076c520-a933-4562-a413-962f35db0d56",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "3DPlayerView",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5dddf152-c456-454b-aa09-ebafcc0ab917",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "2DTopView",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -829,6 +889,34 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "TrackedDeviceOrientation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "CameraView",
+            "id": "b3684261-4f26-4589-91bd-eb417f59a6f9",
+            "actions": [
+                {
+                    "name": "2DTopView",
+                    "type": "Button",
+                    "id": "088f7ef0-2b1d-4d98-993e-bbe117bd6181",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "5dd60718-2a9b-4817-bfa0-5ca4fdd14d21",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "2DTopView",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

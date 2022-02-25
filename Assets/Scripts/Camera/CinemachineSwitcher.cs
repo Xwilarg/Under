@@ -18,6 +18,8 @@ public class CinemachineSwitcher : MonoBehaviour
     private Camera cameraSettings;
     [SerializeField]
     private GameObject player2D;
+    [SerializeField]
+    private Light sourceLight;
 
     [System.Serializable]
     public enum CameraMode
@@ -47,6 +49,7 @@ public class CinemachineSwitcher : MonoBehaviour
             cam3DPlayer.Priority = 0;
             cameraSettings.orthographic = true;
             player2D.SetActive(true);
+            sourceLight.shadows = LightShadows.None;
         }
         else if (cameraMode == CameraMode.m_2DPlayer)
         {
@@ -55,6 +58,7 @@ public class CinemachineSwitcher : MonoBehaviour
             cam3DPlayer.Priority = 0;
             cameraSettings.orthographic = true;
             player2D.SetActive(true);
+            sourceLight.shadows = LightShadows.None;
         }
         else if (cameraMode == CameraMode.m_3DPlayer)
         {
@@ -63,6 +67,7 @@ public class CinemachineSwitcher : MonoBehaviour
             cam3DPlayer.Priority = 2;
             cameraSettings.orthographic = false;
             player2D.SetActive(false);
+            sourceLight.shadows = LightShadows.Hard;
         }
     }
 }
