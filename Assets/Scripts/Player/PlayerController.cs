@@ -22,7 +22,8 @@ namespace VarVarGamejam.Player
         private float _verticalSpeed;
         private float _footstepDelay;
 
-        IPlayerBehaviour _playerBehaviour;
+        private IPlayerBehaviour _playerBehaviour;
+        private IPlayerBehaviour _tpsControls, _topDownControls;
 
         private void Start()
         {
@@ -33,7 +34,10 @@ namespace VarVarGamejam.Player
             _footstepsWalk = _info.FootstepsWalk.ToList();
             _footstepsRun = _info.FootstepsRun.ToList();
 
-            _playerBehaviour = new ThirdPersonBehaviour(transform, _head, _info);
+            _tpsControls = new ThirdPersonBehaviour(transform, _head, _info);
+            _topDownControls = new TopDownBehaviour();
+
+            _playerBehaviour = _tpsControls;
         }
 
         private void FixedUpdate()
@@ -101,6 +105,11 @@ namespace VarVarGamejam.Player
         public void OnSprint(InputAction.CallbackContext value)
         {
             _isSprinting = value.ReadValueAsButton();
+        }
+
+        public void ChangeView(InputAction.CallbackContext value)
+        {
+            _playerBehaviour = _playerBehaviour == _tpsControls ? _topDownControls : _tpsControls;
         }
     }
 }

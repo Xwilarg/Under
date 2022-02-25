@@ -2,18 +2,18 @@
 
 namespace VarVarGamejam.Player.Behaviour
 {
-    public class TopDownDehaviour : IPlayerBehaviour
+    public class TopDownBehaviour : IPlayerBehaviour
     {
-        public Vector2 Movement => throw new System.NotImplementedException();
+        private Vector2 _mov;
+
+        public Vector2 Movement => _mov;
 
         public void OnKeyboardInput(Vector2 input)
         {
-            throw new System.NotImplementedException();
+            _mov = input;
         }
 
         public void OnMouseMove(Vector2 mousePos)
-        {
-            throw new System.NotImplementedException();
-        }
+        { }
     }
 }
