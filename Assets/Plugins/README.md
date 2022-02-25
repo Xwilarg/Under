@@ -1,0 +1,1 @@
+You must download Newtonsoft.Json.dll from [here](https://github.com/JamesNK/Newtonsoft.Json/releases/tag/13.0.1) and put it in this directory
