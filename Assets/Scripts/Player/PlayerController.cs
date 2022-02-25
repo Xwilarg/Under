@@ -61,7 +61,7 @@ namespace VarVarGamejam.Player
 			else
 			{
 				// We are currently jumping, reduce our jump velocity by gravity and apply it
-				_verticalSpeed += Physics.gravity.y;
+				_verticalSpeed += Physics.gravity.y * _info.GravityMultiplicator;
 				moveDir.y += _verticalSpeed;
 			}
 

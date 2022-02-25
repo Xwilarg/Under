@@ -25,6 +25,7 @@ namespace VarVarGamejam.SO
         [Tooltip("Delay between 2 footsteps")]
         public float FootstepDelay;
         public float FootstepDelayRunMultiplier;
+        public float GravityMultiplicator;
 
         [Header("Audio")]
         public AudioClip[] FootstepsWalk, FootstepsRun;
