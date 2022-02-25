@@ -116,9 +116,6 @@ namespace VarVarGamejam.Map
             _map[0][posEntrance] = TileType.Entrance;
             _map[_info.MapSize - 1][posExit] = TileType.Exit;
 
-            // Spawn player at the entrance
-            Instantiate(_playerPrefab, new Vector3(posEntrance, .5f, 0f), Quaternion.identity);
-
             var wallParent = new GameObject("Map");
             // Once we are done, we replace unused "corridors" by walls
             for (int y = 0; y < _info.MapSize; y++)
@@ -131,15 +128,23 @@ namespace VarVarGamejam.Map
                         TileType.Pending => true,
                         _ => false
                     };
-                    var go = Instantiate(isWall ? _info.WallPrefab : _info.FloorPrefab, new Vector3(x, (isWall ? .5f : 0f), y), Quaternion.identity);
-                    go.transform.parent = wallParent.transform;
                     if (isWall)
                     {
+                        var go = Instantiate(_info.WallPrefab, new Vector3(x, .5f, y), Quaternion.identity);
+                        go.transform.parent = wallParent.transform;
                         _map[y][x] = TileType.Wall;
                         _walls.Add(go);
                     }
                 }
             }
+
+            // Spawn floor
+            var floorPos = Mathf.FloorToInt(_info.MapSize / 2f);
+            var floor = Instantiate(_info.FloorPrefab, new Vector3(floorPos, 0f, floorPos), Quaternion.identity);
+            floor.transform.localScale = new Vector3(_info.MapSize / 10f, 1f, _info.MapSize / 10f);
+
+            // Spawn player at the entrance
+            Instantiate(_playerPrefab, new Vector3(posEntrance, .5f, 0f), Quaternion.identity);
         }
 
         private bool IsOutOfBounds(int y, int x, int size)
