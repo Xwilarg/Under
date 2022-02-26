@@ -207,23 +207,27 @@ namespace VarVarGamejam.Map
             var posEntrance = (Random.Range(0, s) * 2) + 1;
             var posExit = (Random.Range(0, s) * 2) + 1;
 
+            (Vector2Int Pos, Vector2Int Dir) entrance, exit;
+
             if (safePos == null)
             {
-                _map[0][posEntrance] = TileType.Entrance;
-                _map[_info.MapSize - 1][posExit] = TileType.Exit;
+                entrance = (new(posEntrance, 0), Vector2Int.down);
+                exit = (new(posExit, _info.MapSize - 1), Vector2Int.up);
             }
             else
             {
-                Vector2Int longestPos = new Vector2Int[]
+                (Vector2Int Pos, Vector2Int Dir) longestPos = new (Vector2Int Pos, Vector2Int Dir)[]
                 {
-                    new(0, posEntrance),
-                    new(_info.MapSize - 1, posEntrance),
-                    new(posEntrance, 0),
-                    new(posEntrance, _info.MapSize - 1)
-                }.OrderByDescending(x => Vector2.Distance(safePos.Value, x)).ElementAt(0);
-                _map[longestPos.y][longestPos.x] = TileType.Entrance;
-                _map[(_info.MapSize - 1) - longestPos.y][(_info.MapSize - 1) - longestPos.x] = TileType.Exit;
+                    (new(0, posEntrance), Vector2Int.left),
+                    (new(_info.MapSize - 1, posEntrance), Vector2Int.right),
+                    (new(posEntrance, 0), Vector2Int.down),
+                    (new(posEntrance, _info.MapSize - 1), Vector2Int.up)
+                }.OrderByDescending(x => Vector2.Distance(safePos.Value, x.Pos)).ElementAt(0);
+                entrance = longestPos;
+                exit = (new((_info.MapSize - 1) - longestPos.Pos.x, (_info.MapSize - 1) - longestPos.Pos.y), -longestPos.Dir);
             }
+            _map[entrance.Pos.y][entrance.Pos.x] = TileType.Entrance;
+            _map[exit.Pos.y][exit.Pos.x] = TileType.Exit;
 
             // Once we are done, we replace unused "corridors" by walls
             for (int y = 0; y < _info.MapSize; y++)
@@ -276,10 +280,11 @@ namespace VarVarGamejam.Map
                 // Spawn player and goal
                 Instantiate(_playerPrefab, new Vector3(posEntrance, .5f, 0f), Quaternion.identity);
                 _goal = Instantiate(_info.GoalPrefab);
-                _walls.Add(Instantiate(_info.WallPrefab, new Vector3(posEntrance, .5f, -1f), Quaternion.identity));
-                _walls.Add(Instantiate(_info.WallPrefab, new Vector3(posExit, .5f, _info.MapSize), Quaternion.identity));
             }
-            _goal.transform.position = new Vector3(posExit, _info.GoalPrefab.transform.localScale.y / 2f, _info.MapSize - 1);
+
+            _goal.transform.position = new Vector3(exit.Pos.x, _info.GoalPrefab.transform.localScale.y / 2f, exit.Pos.y);
+            _walls.Add(Instantiate(_info.WallPrefab, new Vector3(entrance.Pos.x + entrance.Dir.x, .5f, entrance.Pos.y + entrance.Dir.y), Quaternion.identity));
+            _walls.Add(Instantiate(_info.WallPrefab, new Vector3(exit.Pos.x + exit.Dir.x, .5f, exit.Pos.y + exit.Dir.y), Quaternion.identity));
         }
 
         private bool IsOutOfBounds(int y, int x, int size)
