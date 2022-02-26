@@ -17,4 +17,5 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 44ddb3ef34d5fc247866bb2124ace298, type: 3}
   - {fileID: 21300000, guid: 60719fb28b0a10941828e32a467d5e51, type: 3}
   - {fileID: 21300000, guid: 9b0712535b4660b4da67b8ee3a05fe1d, type: 3}
-  BatteryDuration: 10
+  BatteryDuration: 20
+  BlinkRate: 0.25

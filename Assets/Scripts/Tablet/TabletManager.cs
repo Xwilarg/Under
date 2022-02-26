@@ -24,9 +24,12 @@ namespace VarVarGamejam.Tablet
 
         private float _remainingBattery;
 
+        private float _blinkTimer;
+
         private void Start()
         {
             _remainingBattery = _info.BatteryDuration;
+            _blinkTimer = _info.BlinkRate;
         }
 
         public void Toggle()
@@ -48,7 +51,17 @@ namespace VarVarGamejam.Tablet
                 }
                 else
                 {
-                    _batteryImage.sprite = _info.BatteryImages[(_info.BatteryImages.Length - 1) - Mathf.RoundToInt(_remainingBattery * (_info.BatteryImages.Length - 1) / _info.BatteryDuration)];
+                    var pos = Mathf.RoundToInt(_remainingBattery * (_info.BatteryImages.Length - 1) / _info.BatteryDuration);
+                    _batteryImage.sprite = _info.BatteryImages[(_info.BatteryImages.Length - 1) - pos];
+                    if (pos == 0) // Blink effect on battery
+                    {
+                        _blinkTimer -= Time.deltaTime;
+                        if (_blinkTimer <= 0f)
+                        {
+                            _batteryImage.enabled = !_batteryImage.enabled;
+                            _blinkTimer = _info.BlinkRate;
+                        }
+                    }
                 }
             }
         }

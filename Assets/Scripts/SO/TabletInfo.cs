@@ -8,5 +8,7 @@ namespace VarVarGamejam.SO
         public Sprite[] BatteryImages;
 
         public float BatteryDuration;
+
+        public float BlinkRate;
     }
 }
