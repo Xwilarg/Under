@@ -256,6 +256,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: German
       objectReference: {fileID: 0}
+    - target: {fileID: 6317165656810709125, guid: 6ea62b37e09eccb4dade9420d193f46d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 57d12e26c46aa554da851a21067b392d, type: 3}
     - target: {fileID: 6317165656810709126, guid: 6ea62b37e09eccb4dade9420d193f46d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -608,6 +612,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Russian
       objectReference: {fileID: 0}
+    - target: {fileID: 6317165656810709125, guid: 6ea62b37e09eccb4dade9420d193f46d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b41024ec59a96694cbc35438e4d9a431, type: 3}
     - target: {fileID: 6317165656810709126, guid: 6ea62b37e09eccb4dade9420d193f46d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -726,6 +734,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chinese
       objectReference: {fileID: 0}
+    - target: {fileID: 6317165656810709125, guid: 6ea62b37e09eccb4dade9420d193f46d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0316e9b66c3ec1244bae6e47590c5841, type: 3}
     - target: {fileID: 6317165656810709126, guid: 6ea62b37e09eccb4dade9420d193f46d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1233,6 +1245,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: French
       objectReference: {fileID: 0}
+    - target: {fileID: 6317165656810709125, guid: 6ea62b37e09eccb4dade9420d193f46d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2e240d3c4ee3334468ce5916400a2933, type: 3}
     - target: {fileID: 6317165656810709126, guid: 6ea62b37e09eccb4dade9420d193f46d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1351,6 +1367,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spanish
       objectReference: {fileID: 0}
+    - target: {fileID: 6317165656810709125, guid: 6ea62b37e09eccb4dade9420d193f46d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5d33be1a7f1cb88409f685327098792f, type: 3}
     - target: {fileID: 6317165656810709126, guid: 6ea62b37e09eccb4dade9420d193f46d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
