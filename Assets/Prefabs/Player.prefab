@@ -673,19 +673,7 @@ MonoBehaviour:
     m_ActionId: 62846c74-8a63-4097-b426-d4bba7368c39
     m_ActionName: Player/Fire[/Mouse/leftButton]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3732384258242224988}
-        m_TargetAssemblyTypeName: VarVarGamejam.Player.PlayerController, Assembly-CSharp
-        m_MethodName: OnJump
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 3283e843-2b2b-466d-aa67-1d03ad10a3a0
     m_ActionName: Player/Jump[/Keyboard/space]
   - m_PersistentCalls:

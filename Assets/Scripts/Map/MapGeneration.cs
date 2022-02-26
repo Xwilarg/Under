@@ -284,7 +284,7 @@ namespace VarVarGamejam.Map
 
             _goal.transform.position = new Vector3(exit.Pos.x, _info.GoalPrefab.transform.localScale.y / 2f, exit.Pos.y);
             _walls.Add(Instantiate(_info.WallPrefab, new Vector3(entrance.Pos.x + entrance.Dir.x, .5f, entrance.Pos.y + entrance.Dir.y), Quaternion.identity));
-            _walls.Add(Instantiate(_info.WallPrefab, new Vector3(exit.Pos.x + exit.Dir.x, .5f, exit.Pos.y + exit.Dir.y), Quaternion.identity));
+            _walls.Add(Instantiate(_info.WallPrefab, new Vector3(exit.Pos.x + (firstTime ? exit.Dir.x : 0f), .5f, exit.Pos.y + (firstTime ? exit.Dir.y : 0f)), Quaternion.identity));
         }
 
         private bool IsOutOfBounds(int y, int x, int size)
