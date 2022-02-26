@@ -123,6 +123,8 @@ namespace VarVarGamejam.Player
                     SwitchProfile(_tpsControls);
 
                     TogglePossibleGoalTake(true);
+
+                    GoalManager.Instance.EnableBGM();
                 }
                 else if (!_isGoalInHands)
                 {
