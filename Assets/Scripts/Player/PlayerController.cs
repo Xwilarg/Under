@@ -193,7 +193,7 @@ namespace VarVarGamejam.Player
                 TogglePossibleGoalTake(false);
                 _isGoalInHands = true;
                 GoalManager.Instance.TakeObjective();
-                _cameraShake.Launch(.25f, .25f);
+                _cameraShake.Launch(3f, .25f);
 
                 GoalManager.Instance.EnableMapHelp();
 

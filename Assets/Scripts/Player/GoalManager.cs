@@ -48,6 +48,7 @@ namespace VarVarGamejam.Menu
 
         public void TakeObjective()
         {
+            ObjectiveObj.transform.parent.GetComponent<AudioSource>().Play();
             ObjectiveObj.SetActive(false);
             _gameTimer = _info.GameTimer;
             _timerBar.parent.gameObject.SetActive(true);
