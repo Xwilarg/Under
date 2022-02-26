@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
-using VarVarGamejam.Menu;
 using VarVarGamejam.SO;
 using VarVarGamejam.Tablet;
 
@@ -29,6 +28,8 @@ namespace VarVarGamejam.Map
 
         private readonly List<ObjPos> _playerTrap = new();
         private readonly Timer _trapTimer = new();
+
+        public float Middle { get; private set; }
 
         private readonly List<Vector2Int> _allDirs = new()
         {
@@ -245,13 +246,15 @@ namespace VarVarGamejam.Map
             // The following actions shouldn't be done twice
             if (firstTime)
             {
+                Middle = Mathf.Floor(_info.MapSize / 2f);
+
                 // Spawn floor
                 var floorPos = Mathf.FloorToInt(_info.MapSize / 2f);
                 var floor = Instantiate(_info.FloorPrefab, new Vector3(floorPos, 0f, floorPos), Quaternion.identity);
                 floor.transform.localScale = new Vector3(_info.MapSize / 10f, 1f, _info.MapSize / 10f);
 
                 // Set minimap position
-                TabletManager.Instance.SetMinimapCamera(Mathf.Floor(_info.MapSize / 2f), Mathf.Floor(_info.MapSize / 2f), _info.MapSize / 2f);
+                TabletManager.Instance.SetMinimapCamera(Middle, Middle, _info.MapSize / 2f);
 
                 // Spawn player and goal
                 Instantiate(_playerPrefab, new Vector3(posEntrance, .5f, 0f), Quaternion.identity);

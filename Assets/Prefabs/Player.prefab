@@ -598,6 +598,7 @@ MonoBehaviour:
   _topDownCamera: {fileID: 2045763369643298959}
   _cameraShake: {fileID: 2025849557308509157}
   _torchlight: {fileID: 8351801052243801125}
+  _icon: {fileID: 8894905479403072917}
 --- !u!114 &3732384258242224978
 MonoBehaviour:
   m_ObjectHideFlags: 0

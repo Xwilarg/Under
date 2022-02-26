@@ -23,6 +23,8 @@ namespace VarVarGamejam.Player
         private Shake _cameraShake;
         [SerializeField]
         private Light _torchlight;
+        [SerializeField]
+        private SpriteRenderer _icon;
 
         private List<AudioClip> _footstepsWalk, _footstepsRun;
 
@@ -50,7 +52,7 @@ namespace VarVarGamejam.Player
             _tpsControls = new ThirdPersonBehaviour(transform, _head, _info, _tpsCamera);
             _topDownControls = new TopDownBehaviour(_body, _topDownCamera);
 
-            TabletManager.Instance.SetPlayerLight(_torchlight);
+            TabletManager.Instance.SetPlayerLight(_icon, gameObject, _torchlight);
 
             SwitchProfile(_topDownControls);
         }

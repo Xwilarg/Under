@@ -25,12 +25,16 @@ namespace VarVarGamejam.Tablet
         [SerializeField]
         private Image _batteryImage;
 
-        private float _remainingBattery;
+        [SerializeField]
+        private Radar _radar;
 
+        private float _remainingBattery;
         private float _blinkTimer;
 
-        public void SetPlayerLight(Light light)
+        public void SetPlayerLight(SpriteRenderer playerIcon, GameObject player, Light light)
         {
+            _radar.PlayerRadarIcon = playerIcon;
+            _radar.Player = player;
             foreach (var cam in _minimapCameras)
             {
                 cam.PlayerLight = light;
