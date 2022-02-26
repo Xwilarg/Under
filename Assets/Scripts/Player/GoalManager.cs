@@ -9,6 +9,9 @@ namespace VarVarGamejam.Menu
         [SerializeField]
         private GameObject _takeHelp;
 
+        [SerializeField]
+        private Camera _minimapCamera;
+
         public GameObject ObjectiveObj { private get; set; }
 
         private void Awake()
@@ -24,6 +27,12 @@ namespace VarVarGamejam.Menu
         public void TakeObjective()
         {
             ObjectiveObj.SetActive(false);
+        }
+
+        public void SetMinimapCamera(float x, float y, float size)
+        {
+            _minimapCamera.transform.position = new Vector3(x, 10f, y);
+            _minimapCamera.orthographicSize = size;
         }
     }
 }

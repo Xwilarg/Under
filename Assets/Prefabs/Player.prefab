@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6548364988058440833}
   - component: {fileID: 3502661948302640847}
   - component: {fileID: 3879972541074510942}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TopDownCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8069963342269276500}
   - component: {fileID: 8351801052243801125}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +190,7 @@ GameObject:
   - component: {fileID: 7707405138224467608}
   - component: {fileID: 7707405138224467611}
   - component: {fileID: 7707405138224467610}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -289,7 +289,7 @@ GameObject:
   - component: {fileID: 7707405138345722361}
   - component: {fileID: 7707405138345722360}
   - component: {fileID: 2025849557308509157}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TPSCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -383,7 +383,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7707405139286960690}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -420,7 +420,7 @@ GameObject:
   - component: {fileID: 3732384258242224988}
   - component: {fileID: 3732384258242224978}
   - component: {fileID: 4956340174446635643}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -480,6 +480,7 @@ MonoBehaviour:
   _tpsCamera: {fileID: 7707405138345722363}
   _topDownCamera: {fileID: 2045763369643298959}
   _cameraShake: {fileID: 2025849557308509157}
+  _torchlight: {fileID: 8351801052243801125}
 --- !u!114 &3732384258242224978
 MonoBehaviour:
   m_ObjectHideFlags: 0

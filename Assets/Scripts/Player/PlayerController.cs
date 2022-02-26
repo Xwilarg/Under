@@ -20,6 +20,8 @@ namespace VarVarGamejam.Player
         private GameObject _tpsCamera, _topDownCamera;
         [SerializeField]
         private Shake _cameraShake;
+        [SerializeField]
+        private Light _torchlight;
 
         private List<AudioClip> _footstepsWalk, _footstepsRun;
 
@@ -46,6 +48,8 @@ namespace VarVarGamejam.Player
 
             _tpsControls = new ThirdPersonBehaviour(transform, _head, _info, _tpsCamera);
             _topDownControls = new TopDownBehaviour(_body, _topDownCamera);
+
+            MinimapCamera.Instance.PlayerLight = _torchlight;
 
             SwitchProfile(_topDownControls);
         }
