@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using VarVarGamejam.Effect;
 using VarVarGamejam.Map;
 using VarVarGamejam.Menu;
 using VarVarGamejam.Player.Behaviour;
@@ -17,6 +18,8 @@ namespace VarVarGamejam.Player
         private Transform _head, _body;
         [SerializeField]
         private GameObject _tpsCamera, _topDownCamera;
+        [SerializeField]
+        private Shake _cameraShake;
 
         private List<AudioClip> _footstepsWalk, _footstepsRun;
 
@@ -183,6 +186,7 @@ namespace VarVarGamejam.Player
                 TogglePossibleGoalTake(false);
                 _isGoalInHands = true;
                 GoalManager.Instance.TakeObjective();
+                _cameraShake.Launch(.25f, .25f);
             }
         }
     }

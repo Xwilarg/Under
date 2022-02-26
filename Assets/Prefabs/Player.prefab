@@ -288,6 +288,7 @@ GameObject:
   - component: {fileID: 7707405138345722366}
   - component: {fileID: 7707405138345722361}
   - component: {fileID: 7707405138345722360}
+  - component: {fileID: 2025849557308509157}
   m_Layer: 0
   m_Name: TPSCamera
   m_TagString: MainCamera
@@ -361,6 +362,18 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7707405138345722363}
   m_Enabled: 1
+--- !u!114 &2025849557308509157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7707405138345722363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 496b3f7f86d641a40b02945e4face9c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7707405139286960701
 GameObject:
   m_ObjectHideFlags: 0
@@ -466,6 +479,7 @@ MonoBehaviour:
   _body: {fileID: 7707405138224467589}
   _tpsCamera: {fileID: 7707405138345722363}
   _topDownCamera: {fileID: 2045763369643298959}
+  _cameraShake: {fileID: 2025849557308509157}
 --- !u!114 &3732384258242224978
 MonoBehaviour:
   m_ObjectHideFlags: 0
