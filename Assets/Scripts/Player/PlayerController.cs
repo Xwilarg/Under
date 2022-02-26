@@ -53,6 +53,8 @@ namespace VarVarGamejam.Player
             MinimapCamera.Instance.PlayerLight = _torchlight;
 
             SwitchProfile(_topDownControls);
+
+            CameraController.Instance.SetPlayerCamera(this.transform);
         }
 
         private void FixedUpdate()
@@ -119,6 +121,7 @@ namespace VarVarGamejam.Player
                 {
                     // We are near goal, switch to TPS camera
                     SwitchProfile(_tpsControls);
+                    CameraController.Instance.SwitchPriority(2);
 
                     // Now that the user, we introduce the notion that he can't go back
                     MapGeneration.Instance.EnableBackwardPrevention();
