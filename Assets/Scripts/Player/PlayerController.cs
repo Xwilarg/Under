@@ -197,7 +197,7 @@ namespace VarVarGamejam.Player
 
         public void OnMap(InputAction.CallbackContext value)
         {
-            if (value.performed)
+            if (value.performed && _playerBehaviour == _tpsControls)
             {
                 TabletManager.Instance.Toggle();
             }
