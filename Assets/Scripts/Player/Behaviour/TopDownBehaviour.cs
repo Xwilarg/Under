@@ -5,7 +5,7 @@ namespace VarVarGamejam.Player.Behaviour
     public class TopDownBehaviour : IPlayerBehaviour
     {
         private Transform _body;
-        private GameObject _mainLight;
+        private Light _mainLight;
         public Vector2 Movement { private set; get; }
         public GameObject TargetCamera { private set; get; }
 
@@ -13,18 +13,18 @@ namespace VarVarGamejam.Player.Behaviour
         {
             _body = body;
             TargetCamera = camera;
-            _mainLight = GameObject.FindGameObjectWithTag("MainLight");
-            _mainLight.SetActive(false);
+            _mainLight = GameObject.FindGameObjectWithTag("MainLight").GetComponent<Light>();
+            _mainLight.enabled = false;
         }
 
         public void Enable()
         {
-            _mainLight.SetActive(true);
+            _mainLight.enabled = true;
         }
 
         public void Disable()
         {
-            _mainLight.SetActive(false);
+            _mainLight.enabled = false;
             _body.rotation = Quaternion.identity;
         }
 

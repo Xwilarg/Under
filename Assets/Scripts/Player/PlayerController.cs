@@ -2,9 +2,12 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using VarVarGamejam.Effect;
 using VarVarGamejam.Map;
+using VarVarGamejam.Menu;
 using VarVarGamejam.Player.Behaviour;
 using VarVarGamejam.SO;
+using VarVarGamejam.Tablet;
 
 namespace VarVarGamejam.Player
 {
@@ -16,6 +19,12 @@ namespace VarVarGamejam.Player
         private Transform _head, _body;
         [SerializeField]
         private GameObject _tpsCamera, _topDownCamera;
+        [SerializeField]
+        private Shake _cameraShake;
+        [SerializeField]
+        private Light _torchlight;
+        [SerializeField]
+        private SpriteRenderer _icon;
 
         private List<AudioClip> _footstepsWalk, _footstepsRun;
 
@@ -28,6 +37,9 @@ namespace VarVarGamejam.Player
         private IPlayerBehaviour _playerBehaviour;
         private IPlayerBehaviour _tpsControls, _topDownControls;
 
+        private bool _isGoalInHands;
+        private bool _isNearGoal;
+
         private void Start()
         {
             _audioSource = GetComponent<AudioSource>();
@@ -39,6 +51,8 @@ namespace VarVarGamejam.Player
 
             _tpsControls = new ThirdPersonBehaviour(transform, _head, _info, _tpsCamera);
             _topDownControls = new TopDownBehaviour(_body, _topDownCamera);
+
+            TabletManager.Instance.SetPlayerLight(_icon, gameObject, _torchlight);
 
             SwitchProfile(_topDownControls);
         }
@@ -93,15 +107,36 @@ namespace VarVarGamejam.Player
             }
         }
 
+        private void TogglePossibleGoalTake(bool value)
+        {
+            _isNearGoal = value;
+            GoalManager.Instance.ToggleTakeHelp(value);
+        }
+
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Goal") && _playerBehaviour == _topDownControls)
+            if (other.CompareTag("Goal"))
             {
-                // We are near goal, switch to TPS camera
-                SwitchProfile(_tpsControls);
+                if (_playerBehaviour == _topDownControls)
+                {
+                    // We are near goal, switch to TPS camera
+                    SwitchProfile(_tpsControls);
 
-                // Now that the user, we introduce the notion that he can't go back
-                MapGeneration.Instance.EnableBackwardPrevention();
+                    TogglePossibleGoalTake(true);
+                }
+                else if (!_isGoalInHands)
+                {
+                    TogglePossibleGoalTake(true);
+
+                }
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("Goal") && _isNearGoal)
+            {
+                TogglePossibleGoalTake(false);
             }
         }
 
@@ -143,7 +178,34 @@ namespace VarVarGamejam.Player
 
         public void ChangeView(InputAction.CallbackContext value)
         {
-            SwitchProfile(_playerBehaviour == _tpsControls ? _topDownControls : _tpsControls);
+            if (value.performed)
+            {
+                SwitchProfile(_playerBehaviour == _tpsControls ? _topDownControls : _tpsControls);
+            }
+        }
+
+        public void OnAction(InputAction.CallbackContext value)
+        {
+            if (value.performed && !_isGoalInHands && _isNearGoal)
+            {
+                TogglePossibleGoalTake(false);
+                _isGoalInHands = true;
+                GoalManager.Instance.TakeObjective();
+                _cameraShake.Launch(.25f, .25f);
+
+                GoalManager.Instance.EnableMapHelp();
+
+                // Now that the user, we introduce the notion that he can't go back
+                MapGeneration.Instance.EnableBackwardPrevention();
+            }
+        }
+
+        public void OnMap(InputAction.CallbackContext value)
+        {
+            if (value.performed && _isGoalInHands)
+            {
+                TabletManager.Instance.Toggle();
+            }
         }
     }
 }
