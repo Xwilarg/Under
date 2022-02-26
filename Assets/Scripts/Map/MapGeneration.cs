@@ -18,6 +18,9 @@ namespace VarVarGamejam.Map
         [SerializeField]
         private GameObject _playerPrefab;
 
+        [SerializeField]
+        private AudioClip[] _wallsAudio;
+
         private TileType[][] _map;
         private readonly List<GameObject> _walls = new();
 
@@ -78,20 +81,32 @@ namespace VarVarGamejam.Map
 
         public IEnumerator Regenerate(Vector2Int pos)
         {
+            var randAudio = _wallsAudio[Random.Range(0, _wallsAudio.Length)];
+
+            List<AudioSource> sources = new();
             // Add walls to prevent user to leave
             foreach (var dir in _allDirs)
             {
                 if (_map[pos.y + dir.y][pos.x + dir.x] == TileType.Empty || _map[pos.y + dir.y][pos.x + dir.x] == TileType.EmptyTaken)
                 {
-                    _playerTrap.Add(new(pos + dir, Instantiate(_info.WallPrefab, new Vector3(pos.x + dir.x, .5f, pos.y + dir.y), Quaternion.identity)));
+                    var w = Instantiate(_info.WallPrefab, new Vector3(pos.x + dir.x, .5f, pos.y + dir.y), Quaternion.identity);
+                    var s = w.GetComponent<AudioSource>();
+                    s.clip = randAudio;
+                    s.Play();
+                    sources.Add(s);
+                    _playerTrap.Add(new(pos + dir, w));
                 }
             }
 
             _trapTimer.Start(_info.TimerWall, goUp: true);
-            yield return new WaitForSeconds(_info.TimerWall);
+            yield return new WaitForSeconds(_info.TimerWall + _info.TimerWallRest);
 
             _cache = null;
 
+            foreach (var s in sources)
+            {
+                s.Play();
+            }
             foreach (var wall in _walls)
             {
                 Destroy(wall);
