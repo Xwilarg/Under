@@ -7,6 +7,7 @@ using VarVarGamejam.Map;
 using VarVarGamejam.Menu;
 using VarVarGamejam.Player.Behaviour;
 using VarVarGamejam.SO;
+using VarVarGamejam.Tablet;
 
 namespace VarVarGamejam.Player
 {
@@ -191,6 +192,14 @@ namespace VarVarGamejam.Player
                 _isGoalInHands = true;
                 GoalManager.Instance.TakeObjective();
                 _cameraShake.Launch(.25f, .25f);
+            }
+        }
+
+        public void OnMap(InputAction.CallbackContext value)
+        {
+            if (value.performed)
+            {
+                TabletManager.Instance.Toggle();
             }
         }
     }

@@ -484,7 +484,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1039922647
 RectTransform:
   m_ObjectHideFlags: 0
@@ -551,6 +551,7 @@ GameObject:
   - component: {fileID: 1117414964}
   - component: {fileID: 1117414965}
   - component: {fileID: 1117414966}
+  - component: {fileID: 1117414967}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -601,6 +602,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _takeHelp: {fileID: 696033948}
   _minimapCamera: {fileID: 1555638710}
+--- !u!114 &1117414967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1117414963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 335eabed1f512ff45a378ed4084257c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tabletObj: {fileID: 1039922646}
+  _info: {fileID: 11400000, guid: b46d62c5231658e438db7132e2951ab6, type: 2}
 --- !u!1 &1502220368
 GameObject:
   m_ObjectHideFlags: 0
@@ -687,7 +702,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1555638711}
   - component: {fileID: 1555638710}
-  - component: {fileID: 1555638709}
   - component: {fileID: 1555638712}
   m_Layer: 0
   m_Name: MinimapCamera
@@ -696,14 +710,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1555638709
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1555638708}
-  m_Enabled: 1
 --- !u!20 &1555638710
 Camera:
   m_ObjectHideFlags: 0

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace VarVarGamejam.Player
+namespace VarVarGamejam.Tablet
 {
     public class MinimapCamera : MonoBehaviour
     {
