@@ -55,6 +55,8 @@ namespace VarVarGamejam.Player
             TabletManager.Instance.SetPlayerLight(_icon, gameObject, _torchlight);
 
             SwitchProfile(_topDownControls);
+
+            CameraController.Instance.SetPlayerCamera(this.transform);
         }
 
         private void FixedUpdate()
@@ -121,6 +123,7 @@ namespace VarVarGamejam.Player
                 {
                     // We are near goal, switch to TPS camera
                     SwitchProfile(_tpsControls);
+                    CameraController.Instance.SwitchPriority(2);
 
                     TogglePossibleGoalTake(true);
                 }
