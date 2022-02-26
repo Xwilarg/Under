@@ -50,7 +50,7 @@ namespace VarVarGamejam.Player
             _tpsControls = new ThirdPersonBehaviour(transform, _head, _info, _tpsCamera);
             _topDownControls = new TopDownBehaviour(_body, _topDownCamera);
 
-            MinimapCamera.Instance.PlayerLight = _torchlight;
+            TabletManager.Instance.SetPlayerLight(_torchlight);
 
             SwitchProfile(_topDownControls);
         }
@@ -200,7 +200,7 @@ namespace VarVarGamejam.Player
 
         public void OnMap(InputAction.CallbackContext value)
         {
-            if (value.performed && _playerBehaviour == _tpsControls)
+            if (value.performed && _isGoalInHands)
             {
                 TabletManager.Instance.Toggle();
             }

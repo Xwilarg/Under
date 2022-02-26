@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using VarVarGamejam.Menu;
 using VarVarGamejam.SO;
+using VarVarGamejam.Tablet;
 
 namespace VarVarGamejam.Map
 {
@@ -250,7 +251,7 @@ namespace VarVarGamejam.Map
                 floor.transform.localScale = new Vector3(_info.MapSize / 10f, 1f, _info.MapSize / 10f);
 
                 // Set minimap position
-                GoalManager.Instance.SetMinimapCamera(Mathf.Floor(_info.MapSize / 2f), Mathf.Floor(_info.MapSize / 2f), _info.MapSize / 2f);
+                TabletManager.Instance.SetMinimapCamera(Mathf.Floor(_info.MapSize / 2f), Mathf.Floor(_info.MapSize / 2f), _info.MapSize / 2f);
 
                 // Spawn player and goal
                 Instantiate(_playerPrefab, new Vector3(posEntrance, .5f, 0f), Quaternion.identity);

@@ -14,6 +14,9 @@ namespace VarVarGamejam.Tablet
         }
 
         [SerializeField]
+        private MinimapCamera[] _minimapCameras;
+
+        [SerializeField]
         private GameObject _tabletObj;
 
         [SerializeField]
@@ -25,6 +28,23 @@ namespace VarVarGamejam.Tablet
         private float _remainingBattery;
 
         private float _blinkTimer;
+
+        public void SetPlayerLight(Light light)
+        {
+            foreach (var cam in _minimapCameras)
+            {
+                cam.PlayerLight = light;
+            }
+        }
+
+        public void SetMinimapCamera(float x, float y, float size)
+        {
+            foreach (var cam in _minimapCameras)
+            {
+                cam.transform.position = new Vector3(x, 10f, y);
+                cam.GetComponent<Camera>().orthographicSize = size;
+            }
+        }
 
         private void Start()
         {

@@ -7,12 +7,6 @@ namespace VarVarGamejam.Tablet
         [SerializeField]
         private Light _globalLight;
 
-        public static MinimapCamera Instance { get; private set; }
-        private void Awake()
-        {
-            Instance = this;
-        }
-
         public Light PlayerLight { set; private get; }
 
         private bool _isMainLightEnabled;
