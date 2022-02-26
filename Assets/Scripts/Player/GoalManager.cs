@@ -16,6 +16,9 @@ namespace VarVarGamejam.Menu
         [SerializeField]
         private GameInfo _info;
 
+        [SerializeField]
+        private GameObject _audioGroup;
+
         private float _gameTimer = -1f;
 
         public GameObject ObjectiveObj { private get; set; }
@@ -45,6 +48,7 @@ namespace VarVarGamejam.Menu
 
         public void TakeObjective()
         {
+            ObjectiveObj.transform.parent.GetComponent<AudioSource>().Play();
             ObjectiveObj.SetActive(false);
             _gameTimer = _info.GameTimer;
             _timerBar.parent.gameObject.SetActive(true);
@@ -53,6 +57,11 @@ namespace VarVarGamejam.Menu
         public void EnableMapHelp()
         {
             _mapHelp.SetActive(true);
+        }
+
+        public void EnableBGM()
+        {
+            _audioGroup.SetActive(true);
         }
     }
 }

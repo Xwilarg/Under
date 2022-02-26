@@ -18,6 +18,9 @@ namespace VarVarGamejam.Map
         [SerializeField]
         private GameObject _playerPrefab;
 
+        [SerializeField]
+        private AudioClip[] _wallsAudio;
+
         private TileType[][] _map;
         private readonly List<GameObject> _walls = new();
 
@@ -38,6 +41,7 @@ namespace VarVarGamejam.Map
             Vector2Int.up,
             Vector2Int.down
         };
+        private GameObject _goal;
 
         private void Awake()
         {
@@ -77,20 +81,32 @@ namespace VarVarGamejam.Map
 
         public IEnumerator Regenerate(Vector2Int pos)
         {
+            var randAudio = _wallsAudio[Random.Range(0, _wallsAudio.Length)];
+
+            List<AudioSource> sources = new();
             // Add walls to prevent user to leave
             foreach (var dir in _allDirs)
             {
                 if (_map[pos.y + dir.y][pos.x + dir.x] == TileType.Empty || _map[pos.y + dir.y][pos.x + dir.x] == TileType.EmptyTaken)
                 {
-                    _playerTrap.Add(new(pos + dir, Instantiate(_info.WallPrefab, new Vector3(pos.x + dir.x, .5f, pos.y + dir.y), Quaternion.identity)));
+                    var w = Instantiate(_info.WallPrefab, new Vector3(pos.x + dir.x, .5f, pos.y + dir.y), Quaternion.identity);
+                    var s = w.GetComponent<AudioSource>();
+                    s.clip = randAudio;
+                    s.Play();
+                    sources.Add(s);
+                    _playerTrap.Add(new(pos + dir, w));
                 }
             }
 
             _trapTimer.Start(_info.TimerWall, goUp: true);
-            yield return new WaitForSeconds(_info.TimerWall);
+            yield return new WaitForSeconds(_info.TimerWall + _info.TimerWallRest);
 
             _cache = null;
 
+            foreach (var s in sources)
+            {
+                s.Play();
+            }
             foreach (var wall in _walls)
             {
                 Destroy(wall);
@@ -205,8 +221,28 @@ namespace VarVarGamejam.Map
             var s = (_info.MapSize - 3) / 2;
             var posEntrance = (Random.Range(0, s) * 2) + 1;
             var posExit = (Random.Range(0, s) * 2) + 1;
-            _map[0][posEntrance] = TileType.Entrance;
-            _map[_info.MapSize - 1][posExit] = TileType.Exit;
+
+            (Vector2Int Pos, Vector2Int Dir) entrance, exit;
+
+            if (safePos == null)
+            {
+                entrance = (new(posEntrance, 0), Vector2Int.down);
+                exit = (new(posExit, _info.MapSize - 1), Vector2Int.up);
+            }
+            else
+            {
+                (Vector2Int Pos, Vector2Int Dir) longestPos = new (Vector2Int Pos, Vector2Int Dir)[]
+                {
+                    (new(0, posEntrance), Vector2Int.left),
+                    (new(_info.MapSize - 1, posEntrance), Vector2Int.right),
+                    (new(posEntrance, 0), Vector2Int.down),
+                    (new(posEntrance, _info.MapSize - 1), Vector2Int.up)
+                }.OrderByDescending(x => Vector2.Distance(safePos.Value, x.Pos)).ElementAt(0);
+                entrance = longestPos;
+                exit = (new((_info.MapSize - 1) - longestPos.Pos.x, (_info.MapSize - 1) - longestPos.Pos.y), -longestPos.Dir);
+            }
+            _map[entrance.Pos.y][entrance.Pos.x] = TileType.Entrance;
+            _map[exit.Pos.y][exit.Pos.x] = TileType.Exit;
 
             // Once we are done, we replace unused "corridors" by walls
             for (int y = 0; y < _info.MapSize; y++)
@@ -258,10 +294,12 @@ namespace VarVarGamejam.Map
 
                 // Spawn player and goal
                 Instantiate(_playerPrefab, new Vector3(posEntrance, .5f, 0f), Quaternion.identity);
-                Instantiate(_info.GoalPrefab, new Vector3(posExit, _info.GoalPrefab.transform.localScale.y / 2f, _info.MapSize - 1), Quaternion.identity);
-                _walls.Add(Instantiate(_info.WallPrefab, new Vector3(posEntrance, .5f, -1f), Quaternion.identity));
-                _walls.Add(Instantiate(_info.WallPrefab, new Vector3(posExit, .5f, _info.MapSize), Quaternion.identity));
+                _goal = Instantiate(_info.GoalPrefab);
             }
+
+            _goal.transform.position = new Vector3(exit.Pos.x, _info.GoalPrefab.transform.localScale.y / 2f, exit.Pos.y);
+            _walls.Add(Instantiate(_info.WallPrefab, new Vector3(entrance.Pos.x + entrance.Dir.x, .5f, entrance.Pos.y + entrance.Dir.y), Quaternion.identity));
+            _walls.Add(Instantiate(_info.WallPrefab, new Vector3(exit.Pos.x + (firstTime ? exit.Dir.x : 0f), .5f, exit.Pos.y + (firstTime ? exit.Dir.y : 0f)), Quaternion.identity));
         }
 
         private bool IsOutOfBounds(int y, int x, int size)

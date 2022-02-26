@@ -12,12 +12,19 @@ namespace VarVarGamejam.Tablet
         [SerializeField]
         private RadarInfo _info;
 
+        private AudioSource _radarBip;
+
         public GameObject Player { set; private get; }
         public SpriteRenderer PlayerRadarIcon { set; private get; }
 
         private Vector2 ToVector2(Vector3 v)
         {
             return new Vector2(v.x, v.z);
+        }
+
+        private void Start()
+        {
+            _radarBip = GetComponent<AudioSource>();
         }
 
         private void Update()
@@ -33,6 +40,7 @@ namespace VarVarGamejam.Tablet
             if (angle < prevRot && angle >= nextRot) // TODO: A small part isn't covered
             {
                 PlayerRadarIcon.color = new Color(PlayerRadarIcon.color.r, PlayerRadarIcon.color.g, PlayerRadarIcon.color.b, 1f);
+                _radarBip.Play();
             }
             else
             {

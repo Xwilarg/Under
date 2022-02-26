@@ -30,6 +30,8 @@ namespace VarVarGamejam.Tablet
 
         private float _remainingBattery;
         private float _blinkTimer;
+        private AudioSource _batteryLow;
+        private bool _isLow = false;
 
         public void SetPlayerLight(SpriteRenderer playerIcon, GameObject player, Light light)
         {
@@ -54,6 +56,7 @@ namespace VarVarGamejam.Tablet
         {
             _remainingBattery = _info.BatteryDuration;
             _blinkTimer = _info.BlinkRate;
+            _batteryLow = GetComponent<AudioSource>();
         }
 
         public void Toggle()
@@ -61,6 +64,17 @@ namespace VarVarGamejam.Tablet
             if (_remainingBattery > 0f)
             {
                 _tabletObj.SetActive(!_tabletObj.activeInHierarchy);
+                if (_isLow)
+                {
+                    if (_tabletObj.activeInHierarchy)
+                    {
+                        _batteryLow.Play();
+                    }
+                    else
+                    {
+                        _batteryLow.Stop();
+                    }
+                }
             }
         }
 
@@ -72,6 +86,7 @@ namespace VarVarGamejam.Tablet
                 if (_remainingBattery <= 0f) // We are out of battery
                 {
                     _tabletObj.SetActive(false);
+                    _batteryLow.Stop();
                 }
                 else
                 {
@@ -79,6 +94,11 @@ namespace VarVarGamejam.Tablet
                     _batteryImage.sprite = _info.BatteryImages[(_info.BatteryImages.Length - 1) - pos];
                     if (pos == 0) // Blink effect on battery
                     {
+                        if (!_isLow)
+                        {
+                            _isLow = true;
+                            _batteryLow.Play();
+                        }
                         _blinkTimer -= Time.deltaTime;
                         if (_blinkTimer <= 0f)
                         {
