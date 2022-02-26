@@ -120,8 +120,6 @@ namespace VarVarGamejam.Player
                     // We are near goal, switch to TPS camera
                     SwitchProfile(_tpsControls);
 
-                    // Now that the user, we introduce the notion that he can't go back
-                    MapGeneration.Instance.EnableBackwardPrevention();
                     TogglePossibleGoalTake(true);
                 }
                 else if (!_isGoalInHands)
@@ -192,6 +190,11 @@ namespace VarVarGamejam.Player
                 _isGoalInHands = true;
                 GoalManager.Instance.TakeObjective();
                 _cameraShake.Launch(.25f, .25f);
+
+                GoalManager.Instance.EnableMapHelp();
+
+                // Now that the user, we introduce the notion that he can't go back
+                MapGeneration.Instance.EnableBackwardPrevention();
             }
         }
 

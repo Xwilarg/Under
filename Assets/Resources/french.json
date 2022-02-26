@@ -2,5 +2,7 @@
     "play": "Jouer",
     "take": "Prendre",
 
+    "openMap": "Ouvrir la carte",
+
     "runInstruction": "Fuis et ne reviens pas sur tes pas"
 }

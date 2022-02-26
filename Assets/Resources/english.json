@@ -2,5 +2,7 @@
     "play": "Play",
     "take": "Take",
 
+    "openMap": "Open map",
+
     "runInstruction": "Run away and don't go back"
 }

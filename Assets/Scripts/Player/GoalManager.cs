@@ -7,7 +7,7 @@ namespace VarVarGamejam.Menu
         public static GoalManager Instance { get; private set; }
 
         [SerializeField]
-        private GameObject _takeHelp;
+        private GameObject _takeHelp, _mapHelp;
 
         [SerializeField]
         private Camera _minimapCamera;
@@ -33,6 +33,11 @@ namespace VarVarGamejam.Menu
         {
             _minimapCamera.transform.position = new Vector3(x, 10f, y);
             _minimapCamera.orthographicSize = size;
+        }
+
+        public void EnableMapHelp()
+        {
+            _mapHelp.SetActive(true);
         }
     }
 }
