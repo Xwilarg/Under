@@ -210,5 +210,11 @@ namespace VarVarGamejam.Player
                 TabletManager.Instance.Toggle();
             }
         }
+
+        // Use this to debug the camera
+        public void DebugCameraView(int value)
+        {
+            CameraController.Instance.SwitchPriority(value);
+        }
     }
 }
