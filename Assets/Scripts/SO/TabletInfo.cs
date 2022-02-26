@@ -6,5 +6,7 @@ namespace VarVarGamejam.SO
     public class TabletInfo : ScriptableObject
     {
         public Sprite[] BatteryImages;
+
+        public float BatteryDuration;
     }
 }
