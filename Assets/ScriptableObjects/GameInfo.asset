@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77db164a4691fba498a36058801ce2c0, type: 3}
   m_Name: GameInfo
   m_EditorClassIdentifier: 
-  GameTimer: 300
+  GameTimer: 150
   GameoverFadeTime: 0.3

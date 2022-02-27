@@ -150,6 +150,8 @@ namespace VarVarGamejam.Player
             }
         }
 
+        public bool HaveGoalInHands => _isGoalInHands;
+
         private void OnTriggerExit(Collider other)
         {
             if (other.CompareTag("Goal"))

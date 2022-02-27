@@ -19,7 +19,7 @@ namespace VarVarGamejam.Menu
         private GameInfo _info;
 
         [SerializeField]
-        private GameObject _audioGroup;
+        private GameObject _audioGroup, _lightAudio;
 
         [SerializeField]
         private GameOver _gameOver;
@@ -84,6 +84,7 @@ namespace VarVarGamejam.Menu
         public void EnableBGM()
         {
             _audioGroup.SetActive(true);
+            _lightAudio.SetActive(false);
         }
     }
 }
