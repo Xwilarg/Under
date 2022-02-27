@@ -6,6 +6,11 @@ namespace VarVarGamejam.Menu
 {
     public class MainMenu : MonoBehaviour
     {
+        private void Start()
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+
         public void LoadGame()
         {
             SceneManager.LoadScene("Transition");

@@ -7,7 +7,7 @@
 
     "runInstruction": "Run away and don't go back",
 
-    "entryText1": "",
-    "entryText2": "",
+    "entryText1": "Nobody likes to go underground, but this is your job. You need to find and examine unknown radiation sources.",
+    "entryText2": "Don't be afraid to get lost - you'll have a scanner and you can easily find your way back. But do not use frequently, the battery may drain.",
     "entryText3": "Press Space to continue"
 }

@@ -21,6 +21,9 @@ namespace VarVarGamejam.Menu
         [SerializeField]
         private GameObject _audioGroup;
 
+        [SerializeField]
+        private GameOver _gameOver;
+
         private float _gameTimer = -1f;
 
         public GameObject ObjectiveObj { private get; set; }
@@ -38,8 +41,10 @@ namespace VarVarGamejam.Menu
                 _timerBar.anchorMax = new Vector2(_gameTimer / _info.GameTimer, _timerBar.anchorMax.y);
                 if (_gameTimer <= 0f)
                 {
+                    var p = PlayerController.Instance.transform.position;
+                    StartCoroutine(MapGeneration.Instance.KillPlayer(new Vector2Int(Mathf.RoundToInt(p.x), Mathf.RoundToInt(p.z))));
                     PlayerController.Instance.Loose();
-                    GameOver.Instance.Loose();
+                    _gameOver.gameObject.SetActive(true);
                 }
             }
         }
