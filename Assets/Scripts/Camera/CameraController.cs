@@ -84,6 +84,8 @@ public class CameraController : MonoBehaviour
             cam2DPlayer.Priority = 0;
             cam3DPlayer.Priority = 2;
             cameraSettings.orthographic = false;
+            cameraSettings.cullingMask = ~((1 << 6) | (1 << 7));
+            cam2DPlayer.m_Lens.Orthographic = false;
             sourceLight.shadows = LightShadows.Hard;
         }
     }
