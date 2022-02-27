@@ -3,6 +3,11 @@
     "take": "Prendre",
 
     "openMap": "Ouvrir la carte",
+    "run": "Courir",
 
-    "runInstruction": "Fuis et ne reviens pas sur tes pas"
+    "runInstruction": "Fuis et ne reviens pas sur tes pas",
+
+    "entryText1": "",
+    "entryText2": "",
+    "entryText3": "Appuyez sur Espace pour continuer"
 }
