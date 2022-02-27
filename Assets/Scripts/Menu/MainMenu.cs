@@ -8,7 +8,7 @@ namespace VarVarGamejam.Menu
     {
         public void LoadGame()
         {
-            SceneManager.LoadScene("Main");
+            SceneManager.LoadScene("Transition");
         }
 
         public void SetLanguage(string value)

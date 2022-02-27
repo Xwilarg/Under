@@ -3,6 +3,11 @@
     "take": "Take",
 
     "openMap": "Open map",
+    "run": "Run",
 
-    "runInstruction": "Run away and don't go back"
+    "runInstruction": "Run away and don't go back",
+
+    "entryText1": "",
+    "entryText2": "",
+    "entryText3": "Press Enter to continue"
 }
