@@ -505,7 +505,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7707405139286960690
 Transform:
   m_ObjectHideFlags: 0
@@ -733,15 +733,51 @@ MonoBehaviour:
     m_ActionId: d6d4e555-e13a-42ac-8c26-efbb582b64bb
     m_ActionName: Player/Sprint[/Keyboard/leftShift]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3732384258242224988}
+        m_TargetAssemblyTypeName: VarVarGamejam.Player.PlayerController, Assembly-CSharp
+        m_MethodName: DebugCameraView
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: d7e7d38b-cf9d-453d-b7f6-243b26e8778b
     m_ActionName: Player/2DTopView[/Keyboard/1]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3732384258242224988}
+        m_TargetAssemblyTypeName: VarVarGamejam.Player.PlayerController, Assembly-CSharp
+        m_MethodName: DebugCameraView
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 4b5a5a7f-e4ce-4133-a5be-41a479c6d615
     m_ActionName: Player/2DPlayerView[/Keyboard/2]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3732384258242224988}
+        m_TargetAssemblyTypeName: VarVarGamejam.Player.PlayerController, Assembly-CSharp
+        m_MethodName: DebugCameraView
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: bcf27b4a-4d7a-4536-9702-6acc9f22155e
     m_ActionName: Player/3DPlayerView[/Keyboard/3]
   - m_PersistentCalls:
@@ -760,6 +796,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 8fc3ef3c-2929-477d-a896-517e7a3249eb
     m_ActionName: Player/Map[/Keyboard/m]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b41a4a1a-17e3-400a-9875-f835be577ee8
+    m_ActionName: Transition/NextPhase[/Keyboard/space,/Keyboard/enter]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

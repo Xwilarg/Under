@@ -65,6 +65,8 @@ namespace VarVarGamejam.Player
             TabletManager.Instance.SetPlayerLight(_icon, gameObject, _torchlight);
 
             SwitchProfile(_topDownControls);
+            CameraController.Instance.SetPlayerCamera(this.transform);
+            //_cameraShake = CameraController.Instance.getCameraShake();
         }
 
         private void FixedUpdate()
@@ -136,6 +138,7 @@ namespace VarVarGamejam.Player
                 {
                     // We are near goal, switch to TPS camera
                     SwitchProfile(_tpsControls);
+                    CameraController.Instance.SwitchPriority(2);
 
                     TogglePossibleGoalTake(true);
 
@@ -220,7 +223,8 @@ namespace VarVarGamejam.Player
                 GoalManager.Instance.ToggleNextTakeHelp(true);
                 _isGoalInHands = true;
                 GoalManager.Instance.TakeObjective();
-                _cameraShake.Launch(3f, .25f);
+                //                _cameraShake.Launch(3f, .25f);
+                CinemachineShake.Instance.ShakeCamera(2f, 1f);
 
                 GoalManager.Instance.EnableMapHelp();
 
@@ -236,6 +240,11 @@ namespace VarVarGamejam.Player
                 TabletManager.Instance.Toggle();
                 _canMove = !_canMove;
             }
+        }
+        // Use this to debug the camera
+        public void DebugCameraView(int value)
+        {
+            CameraController.Instance.SwitchPriority(value);
         }
     }
 }
