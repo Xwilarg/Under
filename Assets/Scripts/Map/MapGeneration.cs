@@ -24,6 +24,9 @@ namespace VarVarGamejam.Map
         [SerializeField]
         private Material _floorMatFirst, _floorMatSecond;
 
+        [SerializeField]
+        private GameObject _entranceHelp;
+
         private TileType[][] _map;
         private readonly List<GameObject> _walls = new();
 
@@ -320,6 +323,7 @@ namespace VarVarGamejam.Map
             }
 
             _goal.transform.position = new Vector3(exit.Pos.x, _info.GoalPrefab.transform.localScale.y / 2f, exit.Pos.y);
+            _walls.Add(Instantiate(_entranceHelp, new Vector3(entrance.Pos.x, .5f, entrance.Pos.y), Quaternion.identity));
             _walls.Add(Instantiate(_info.WallPrefab, new Vector3(entrance.Pos.x + entrance.Dir.x, .5f, entrance.Pos.y + entrance.Dir.y), Quaternion.identity));
             _walls.Add(Instantiate(_info.WallPrefab, new Vector3(exit.Pos.x + (firstTime ? exit.Dir.x : 0f), .5f, exit.Pos.y + (firstTime ? exit.Dir.y : 0f)), Quaternion.identity));
         }

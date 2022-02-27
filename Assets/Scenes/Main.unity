@@ -1015,6 +1015,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 62c1382de0a6c5c449bbf6394a0e8ca5, type: 3}
   _floorMatFirst: {fileID: 2100000, guid: 5cb9351b7204a074b94e6790783d024a, type: 2}
   _floorMatSecond: {fileID: 2100000, guid: 6a0e2fef23294254db79903a7a7ade6c, type: 2}
+  _entranceHelp: {fileID: 1745755911570087723, guid: 6b10597e1009a5c4b9cc336c23bde93e, type: 3}
 --- !u!114 &1117414966
 MonoBehaviour:
   m_ObjectHideFlags: 0
