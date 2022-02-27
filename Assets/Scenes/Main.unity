@@ -1086,10 +1086,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7551793114762240638, guid: 946eff498d1034d4f9bd751be16dfdaf, type: 3}
-      propertyPath: sharedProfile
-      value: 
-      objectReference: {fileID: 11400000, guid: acc80c6fe6c68fe4fb5c48b9a4ac7ce6, type: 2}
     - target: {fileID: 7551793114762240639, guid: 946eff498d1034d4f9bd751be16dfdaf, type: 3}
       propertyPath: m_Name
       value: PostProcess
@@ -1314,10 +1310,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1310434621331890742, guid: 1bd63eae171a80c42a86ccb2e73de80e, type: 3}
-      propertyPath: cameraMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1310434621331890742, guid: 1bd63eae171a80c42a86ccb2e73de80e, type: 3}
       propertyPath: sourceLight
       value: 
       objectReference: {fileID: 877655030}
@@ -1376,10 +1368,6 @@ PrefabInstance:
     - target: {fileID: 5509198956543200869, guid: 1bd63eae171a80c42a86ccb2e73de80e, type: 3}
       propertyPath: m_Name
       value: CameraView
-      objectReference: {fileID: 0}
-    - target: {fileID: 5509198956605599933, guid: 1bd63eae171a80c42a86ccb2e73de80e, type: 3}
-      propertyPath: m_Priority
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5509198957609467789, guid: 1bd63eae171a80c42a86ccb2e73de80e, type: 3}
       propertyPath: m_Priority
