@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using VarVarGamejam.Map;
+using VarVarGamejam.Player;
 using VarVarGamejam.SO;
 
 namespace VarVarGamejam.Menu
@@ -15,6 +17,12 @@ namespace VarVarGamejam.Menu
 
         [SerializeField]
         private GameInfo _info;
+
+        [SerializeField]
+        private GameObject _audioGroup;
+
+        [SerializeField]
+        private GameOver _gameOver;
 
         private float _gameTimer = -1f;
 
@@ -33,7 +41,10 @@ namespace VarVarGamejam.Menu
                 _timerBar.anchorMax = new Vector2(_gameTimer / _info.GameTimer, _timerBar.anchorMax.y);
                 if (_gameTimer <= 0f)
                 {
-                    Debug.Break(); // Game lost!
+                    var p = PlayerController.Instance.transform.position;
+                    StartCoroutine(MapGeneration.Instance.KillPlayer(new Vector2Int(Mathf.RoundToInt(p.x), Mathf.RoundToInt(p.z))));
+                    PlayerController.Instance.Loose();
+                    _gameOver.gameObject.SetActive(true);
                 }
             }
         }
@@ -45,6 +56,7 @@ namespace VarVarGamejam.Menu
 
         public void TakeObjective()
         {
+            ObjectiveObj.transform.parent.GetComponent<AudioSource>().Play();
             ObjectiveObj.SetActive(false);
             _gameTimer = _info.GameTimer;
             _timerBar.parent.gameObject.SetActive(true);
@@ -53,6 +65,11 @@ namespace VarVarGamejam.Menu
         public void EnableMapHelp()
         {
             _mapHelp.SetActive(true);
+        }
+
+        public void EnableBGM()
+        {
+            _audioGroup.SetActive(true);
         }
     }
 }

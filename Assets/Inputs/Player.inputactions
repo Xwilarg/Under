@@ -924,6 +924,45 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Transition",
+            "id": "6b5594ec-d97b-46c9-9bf4-934a6826ec8b",
+            "actions": [
+                {
+                    "name": "NextPhase",
+                    "type": "Button",
+                    "id": "b41a4a1a-17e3-400a-9875-f835be577ee8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "4fd74b67-d21c-458b-8db1-af1794b628df",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NextPhase",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6a91f970-6ccb-4802-8491-5b8a7fe0954b",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NextPhase",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

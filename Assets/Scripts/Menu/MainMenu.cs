@@ -6,9 +6,14 @@ namespace VarVarGamejam.Menu
 {
     public class MainMenu : MonoBehaviour
     {
+        private void Start()
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+
         public void LoadGame()
         {
-            SceneManager.LoadScene("Main");
+            SceneManager.LoadScene("Transition");
         }
 
         public void SetLanguage(string value)

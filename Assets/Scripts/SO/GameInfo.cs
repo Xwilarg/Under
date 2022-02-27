@@ -6,5 +6,6 @@ namespace VarVarGamejam.SO
     public class GameInfo : ScriptableObject
     {
         public float GameTimer;
+        public float GameoverFadeTime;
     }
 }

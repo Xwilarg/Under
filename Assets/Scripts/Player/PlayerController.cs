@@ -13,6 +13,13 @@ namespace VarVarGamejam.Player
 {
     public class PlayerController : MonoBehaviour
     {
+        public static PlayerController Instance { get; private set; }
+
+        private void Awake()
+        {
+            Instance = this;
+        }
+
         [SerializeField]
         private PlayerInfo _info;
         [SerializeField]
@@ -25,6 +32,8 @@ namespace VarVarGamejam.Player
         private Light _torchlight;
         [SerializeField]
         private SpriteRenderer _icon;
+
+        private bool _didLost = false;
 
         private List<AudioClip> _footstepsWalk, _footstepsRun;
 
@@ -39,6 +48,7 @@ namespace VarVarGamejam.Player
 
         private bool _isGoalInHands;
         private bool _isNearGoal;
+        private bool _canMove = true;
 
         private void Start()
         {
@@ -61,6 +71,11 @@ namespace VarVarGamejam.Player
 
         private void FixedUpdate()
 		{
+            if (_didLost || !_canMove)
+            {
+                return;
+            }
+
             var pos = _playerBehaviour.Movement;
 			Vector3 desiredMove = transform.forward * pos.y + transform.right * pos.x;
 
@@ -126,6 +141,9 @@ namespace VarVarGamejam.Player
                     CameraController.Instance.SwitchPriority(2);
 
                     TogglePossibleGoalTake(true);
+
+                    GoalManager.Instance.EnableBGM();
+                    MapGeneration.Instance.StartTPSView();
                 }
                 else if (!_isGoalInHands)
                 {
@@ -155,6 +173,12 @@ namespace VarVarGamejam.Player
             _playerBehaviour.Enable();
         }
 
+        public void Loose()
+        {
+            TabletManager.Instance.ForceClose();
+            _didLost = true;
+        }
+
 		public void OnMovement(InputAction.CallbackContext value)
         {
             _playerBehaviour.OnKeyboardInput(value.ReadValue<Vector2>().normalized);
@@ -162,8 +186,11 @@ namespace VarVarGamejam.Player
 
         public void OnLook(InputAction.CallbackContext value)
         {
-            var rot = value.ReadValue<Vector2>();
-            _playerBehaviour.OnMouseMove(rot);
+            if (_canMove)
+            {
+                var rot = value.ReadValue<Vector2>();
+                _playerBehaviour.OnMouseMove(rot);
+            }
         }
 
         public void OnJump(InputAction.CallbackContext value)
@@ -194,7 +221,7 @@ namespace VarVarGamejam.Player
                 TogglePossibleGoalTake(false);
                 _isGoalInHands = true;
                 GoalManager.Instance.TakeObjective();
-                _cameraShake.Launch(.25f, .25f);
+                _cameraShake.Launch(3f, .25f);
 
                 GoalManager.Instance.EnableMapHelp();
 
@@ -205,9 +232,10 @@ namespace VarVarGamejam.Player
 
         public void OnMap(InputAction.CallbackContext value)
         {
-            if (value.performed && _isGoalInHands)
+            if (value.performed && _isGoalInHands && !_didLost)
             {
                 TabletManager.Instance.Toggle();
+                _canMove = !_canMove;
             }
         }
 
