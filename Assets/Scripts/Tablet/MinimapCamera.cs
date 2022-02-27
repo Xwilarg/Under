@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using VarVarGamejam.Map;
 
 namespace VarVarGamejam.Tablet
 {
@@ -17,18 +18,21 @@ namespace VarVarGamejam.Tablet
 
             _isMainLightEnabled = _globalLight.enabled;
             _globalLight.enabled = true;
+            MapGeneration.Instance.DisplayWallsTexts(false);
         }
 
         private void OnPreRender()
         {
             PlayerLight.enabled = false;
             _globalLight.enabled = true;
+            MapGeneration.Instance.DisplayWallsTexts(false);
         }
 
         private void OnPostRender()
         {
             PlayerLight.enabled = true;
             _globalLight.enabled = _isMainLightEnabled;
+            MapGeneration.Instance.DisplayWallsTextsDefault();
         }
     }
 }
