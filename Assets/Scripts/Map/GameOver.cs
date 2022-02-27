@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using VarVarGamejam.SO;
 
@@ -23,6 +24,19 @@ namespace VarVarGamejam.Map
         {
             _fade = GetComponent<Image>();
             _deathAudio = GetComponent<AudioSource>();
+        }
+
+        private void Update()
+        {
+            var nextAlpha = _fade.color.a + Time.deltaTime * _info.GameoverFadeTime;
+            if (nextAlpha >= 1f)
+            {
+                SceneManager.LoadScene("Menu");
+            }
+            else
+            {
+                _fade.color = new Color(_fade.color.r, _fade.color.g, _fade.color.b, nextAlpha);
+            }
         }
 
         public void Loose()
