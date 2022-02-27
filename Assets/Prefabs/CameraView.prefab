@@ -141,7 +141,7 @@ MonoBehaviour:
   cam3DPlayer: {fileID: 5509198956605599933}
   cameraSettings: {fileID: 8488723008381176532}
   sourceLight: {fileID: 0}
-  cameraMode: 0
+  cameraMode: 1
 --- !u!1 &5509198956605599922
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,7 +194,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 10
+  m_Priority: 0
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}

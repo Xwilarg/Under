@@ -45,7 +45,7 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cameraMode = CameraMode.m_2DTop;
+        cameraMode = CameraMode.m_2DPlayer;
         SwitchPriority((int)cameraMode);
     }
 
