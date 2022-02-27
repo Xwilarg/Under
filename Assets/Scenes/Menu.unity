@@ -357,6 +357,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: German
       objectReference: {fileID: 0}
+    - target: {fileID: 6317165656810709120, guid: 6ea62b37e09eccb4dade9420d193f46d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6317165656810709125, guid: 6ea62b37e09eccb4dade9420d193f46d, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -834,6 +838,10 @@ PrefabInstance:
     - target: {fileID: 6317165656810709120, guid: 6ea62b37e09eccb4dade9420d193f46d, type: 3}
       propertyPath: m_Name
       value: Chinese
+      objectReference: {fileID: 0}
+    - target: {fileID: 6317165656810709120, guid: 6ea62b37e09eccb4dade9420d193f46d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6317165656810709125, guid: 6ea62b37e09eccb4dade9420d193f46d, type: 3}
       propertyPath: m_Sprite
@@ -1542,6 +1550,10 @@ PrefabInstance:
     - target: {fileID: 6317165656810709120, guid: 6ea62b37e09eccb4dade9420d193f46d, type: 3}
       propertyPath: m_Name
       value: Spanish
+      objectReference: {fileID: 0}
+    - target: {fileID: 6317165656810709120, guid: 6ea62b37e09eccb4dade9420d193f46d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6317165656810709125, guid: 6ea62b37e09eccb4dade9420d193f46d, type: 3}
       propertyPath: m_Sprite
