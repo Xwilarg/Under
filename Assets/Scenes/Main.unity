@@ -1114,18 +1114,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3435101532132114505, guid: 1bd63eae171a80c42a86ccb2e73de80e, type: 3}
-      propertyPath: m_Lens.m_SensorSize.x
-      value: 2.1213872
-      objectReference: {fileID: 0}
-    - target: {fileID: 3435101532132114505, guid: 1bd63eae171a80c42a86ccb2e73de80e, type: 3}
-      propertyPath: m_Lens.OrthographicSize
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3435101532132114505, guid: 1bd63eae171a80c42a86ccb2e73de80e, type: 3}
-      propertyPath: m_Transitions.m_BlendHint
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 5509198956543200868, guid: 1bd63eae171a80c42a86ccb2e73de80e, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -1174,53 +1162,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: CameraView
       objectReference: {fileID: 0}
-    - target: {fileID: 5509198956605599933, guid: 1bd63eae171a80c42a86ccb2e73de80e, type: 3}
-      propertyPath: m_Lens.NearClipPlane
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 5509198956605599933, guid: 1bd63eae171a80c42a86ccb2e73de80e, type: 3}
-      propertyPath: m_Lens.m_SensorSize.x
-      value: 2.1213872
-      objectReference: {fileID: 0}
-    - target: {fileID: 5509198956605599933, guid: 1bd63eae171a80c42a86ccb2e73de80e, type: 3}
-      propertyPath: m_Transitions.m_BlendHint
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5509198957609467789, guid: 1bd63eae171a80c42a86ccb2e73de80e, type: 3}
-      propertyPath: m_Lens.m_SensorSize.x
-      value: 2.1213872
-      objectReference: {fileID: 0}
     - target: {fileID: 5710431428065362587, guid: 1bd63eae171a80c42a86ccb2e73de80e, type: 3}
       propertyPath: sourceLight
       value: 
       objectReference: {fileID: 877655030}
     - target: {fileID: 8488723008381176531, guid: 1bd63eae171a80c42a86ccb2e73de80e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9
+      value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: 8488723008381176531, guid: 1bd63eae171a80c42a86ccb2e73de80e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -9.112502
       objectReference: {fileID: 0}
     - target: {fileID: 8488723008381176531, guid: 1bd63eae171a80c42a86ccb2e73de80e, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8488723008381176531, guid: 1bd63eae171a80c42a86ccb2e73de80e, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.7071068
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8488723008381176532, guid: 1bd63eae171a80c42a86ccb2e73de80e, type: 3}
       propertyPath: orthographic
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8488723008381176532, guid: 1bd63eae171a80c42a86ccb2e73de80e, type: 3}
+      propertyPath: near clip plane
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 8488723008381176532, guid: 1bd63eae171a80c42a86ccb2e73de80e, type: 3}
       propertyPath: orthographic size
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8488723008381176532, guid: 1bd63eae171a80c42a86ccb2e73de80e, type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 2147483647
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5509198956680928174, guid: 1bd63eae171a80c42a86ccb2e73de80e, type: 3}
@@ -1470,28 +1442,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _line: {fileID: 1890962556}
   _info: {fileID: 11400000, guid: 5b50e1c9f8f95de47bcae194715ea904, type: 2}
---- !u!1 &1524157439 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5509198956605599922, guid: 1bd63eae171a80c42a86ccb2e73de80e, type: 3}
-  m_PrefabInstance: {fileID: 1272567715}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1524157443
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1524157439}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 729aad4491e915a41bda2b8325cf757a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FocusTracksTarget: 0
-  m_FocusTracking: 0
-  m_FocusTarget: {fileID: 0}
-  m_FocusOffset: 0
-  m_Profile: {fileID: 11400000, guid: f7613d3dc6655fd4fa59c12dc9dbc02e, type: 2}
 --- !u!1 &1555638708
 GameObject:
   m_ObjectHideFlags: 0
@@ -1599,76 +1549,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Damping: 0
---- !u!1 &1777376849 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8488723008381176534, guid: 1bd63eae171a80c42a86ccb2e73de80e, type: 3}
-  m_PrefabInstance: {fileID: 1272567715}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1777376853 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8488723008381176531, guid: 1bd63eae171a80c42a86ccb2e73de80e, type: 3}
-  m_PrefabInstance: {fileID: 1272567715}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1777376854
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1777376849}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  volumeTrigger: {fileID: 1777376853}
-  volumeLayer:
-    serializedVersion: 2
-    m_Bits: 256
-  stopNaNPropagation: 1
-  finalBlitToCameraTarget: 0
-  antialiasingMode: 0
-  temporalAntialiasing:
-    jitterSpread: 0.75
-    sharpness: 0.25
-    stationaryBlending: 0.95
-    motionBlending: 0.85
-  subpixelMorphologicalAntialiasing:
-    quality: 2
-  fastApproximateAntialiasing:
-    fastMode: 0
-    keepAlpha: 0
-  fog:
-    enabled: 1
-    excludeSkybox: 1
-  debugLayer:
-    lightMeter:
-      width: 512
-      height: 256
-      showCurves: 1
-    histogram:
-      width: 512
-      height: 256
-      channel: 3
-    waveform:
-      exposure: 0.12
-      height: 256
-    vectorscope:
-      size: 256
-      exposure: 0.12
-    overlaySettings:
-      linearDepth: 0
-      motionColorIntensity: 4
-      motionGridSize: 64
-      colorBlindnessType: 0
-      colorBlindnessStrength: 1
-  m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
-  m_ShowToolkit: 0
-  m_ShowCustomSorter: 0
-  breakBeforeColorGrading: 0
-  m_BeforeTransparentBundles: []
-  m_BeforeStackBundles: []
-  m_AfterStackBundles: []
 --- !u!1 &1796880425
 GameObject:
   m_ObjectHideFlags: 0
