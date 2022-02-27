@@ -48,6 +48,7 @@ namespace VarVarGamejam.Player
 
         private bool _isGoalInHands;
         private bool _isNearGoal;
+        private bool _canMove = true;
 
         private void Start()
         {
@@ -68,7 +69,7 @@ namespace VarVarGamejam.Player
 
         private void FixedUpdate()
 		{
-            if (_didLost)
+            if (_didLost || !_canMove)
             {
                 return;
             }
@@ -182,8 +183,11 @@ namespace VarVarGamejam.Player
 
         public void OnLook(InputAction.CallbackContext value)
         {
-            var rot = value.ReadValue<Vector2>();
-            _playerBehaviour.OnMouseMove(rot);
+            if (_canMove)
+            {
+                var rot = value.ReadValue<Vector2>();
+                _playerBehaviour.OnMouseMove(rot);
+            }
         }
 
         public void OnJump(InputAction.CallbackContext value)
@@ -225,9 +229,10 @@ namespace VarVarGamejam.Player
 
         public void OnMap(InputAction.CallbackContext value)
         {
-            if (value.performed && _isGoalInHands)
+            if (value.performed && _isGoalInHands && !_didLost)
             {
                 TabletManager.Instance.Toggle();
+                _canMove = !_canMove;
             }
         }
     }
