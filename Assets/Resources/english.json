@@ -1,6 +1,8 @@
 {
     "play": "Play",
+    "credits": "Credits",
     "take": "Take",
+    "goback": "Go back",
 
     "openMap": "Open radar",
     "run": "Run",

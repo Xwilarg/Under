@@ -1,6 +1,8 @@
 {
     "play": "Jouer",
+    "credits": "Crédits",
     "take": "Prendre",
+    "goback": "Retour",
 
     "openMap": "Ouvrir le radar",
     "run": "Courir",
