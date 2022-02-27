@@ -272,7 +272,7 @@ GameObject:
   - component: {fileID: 5509198956680928175}
   - component: {fileID: 5509198956680928168}
   - component: {fileID: 5509198956680928169}
-  - component: {fileID: 5509198956680928174}
+  - component: {fileID: 4497073122383362425}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -334,7 +334,7 @@ MonoBehaviour:
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1
---- !u!114 &5509198956680928174
+--- !u!114 &4497073122383362425
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -343,19 +343,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5509198956680928172}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa7155796051b734daa718462081dc5f, type: 3}
+  m_Script: {fileID: 11500000, guid: 36d1163fa822e8b418a0a603ec078d5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 0, z: 0}
-  m_XDamping: 1
-  m_YDamping: 1
-  m_ZDamping: 1
-  m_AngularDampingMode: 0
-  m_PitchDamping: 0
-  m_YawDamping: 0
-  m_RollDamping: 0
-  m_AngularDamping: 0
+  m_Damping: 0
 --- !u!1 &5509198957609467778
 GameObject:
   m_ObjectHideFlags: 0
