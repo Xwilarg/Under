@@ -1,6 +1,8 @@
 {
     "play": "Spelen",
+    "credits": "Credits",
     "take": "Oppakken",
+    "goBack": "Terug",
 
     "openMap": "Radar openen",
     "run": "Rennen",
@@ -11,7 +13,7 @@
     "entryText2": "Wees niet bang om te verdwalen - je hebt een radar om gemakkelijk je weg terug vinden. Maar gebruik het niet te vaak, de batterij kan leeg raken.",
     "entryText3": "Druk op spatiebalk om door te gaan",
 
-    "endText1": "VEILIG",
+    "endText1": "Je bent veilig, maar",
     "endText2": "Ben ik eruit? Wat? Nee.... Alweer....",
 
     "tag1": "Help me hieruit",

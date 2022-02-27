@@ -1,6 +1,8 @@
 {
     "play": "Jouer",
+    "credits": "Crédits",
     "take": "Prendre",
+    "goBack": "Retour",
 
     "openMap": "Ouvrir le radar",
     "run": "Courir",
@@ -11,6 +13,6 @@
     "entryText2": "N'ayez pas peur de vous perdre - vous aurez un radar et vous pouvez facilement retrouver votre chemin. Mais ne l'utilisez pas trop souvent ou vous risquez de tomber à cours de batterie.",
     "entryText3": "Appuyez sur Espace pour continuer",
 
-    "endText1": "EN SECURITE",
+    "endText1": "Vous êtes en sécurité, cependant",
     "endText2": "Ai-je réussit à sortir? Quoi? Non.... Pas encore...."
 }

@@ -1,6 +1,8 @@
 {
     "play": "Play",
+    "credits": "Credits",
     "take": "Take",
+    "goBack": "Go back",
 
     "openMap": "Open radar",
     "run": "Run",
@@ -11,11 +13,22 @@
     "entryText2": "Don't be afraid to get lost - you'll have a radar and you can easily find your way back. But do not use frequently, the battery may drain.",
     "entryText3": "Press Space to continue",
 
-    "endText1": "SAFE",
+    "endText1": "You're safe but",
     "endText2": "Did I get out? What? No.... Again....",
 
     "tag1": "Please help me out from here",
     "tag2": "Watch out",
     "tag3": "Danger",
-    "tag4": "No"
+    "tag4": "No",
+
+    "credits1": "Game designer",
+    "credits2": "Screenwriter, Narrative Designer, Game Designer",
+    "credits3": "Developer",
+    "credits4": "Developer / French translation",
+    "credits5": "3D modeling",
+    "credits6": "Sound designer",
+    "credits7": "UI designer",
+    "credits8": "Dutch translation",
+    "credits9": "Floor texture",
+    "credits10": "Game artist"
 }

@@ -25,6 +25,9 @@ namespace VarVarGamejam.Map
         private Material _floorMatFirst, _floorMatSecond;
 
         [SerializeField]
+        private Material _wallMatFirst, _wallMat;
+
+        [SerializeField]
         private GameObject _entranceHelp;
 
         private TileType[][] _map;
@@ -41,6 +44,8 @@ namespace VarVarGamejam.Map
         public float Middle { get; private set; }
 
         private GameObject _floor;
+
+        private bool _isFps;
 
         private readonly List<Vector2Int> _allDirs = new()
         {
@@ -89,7 +94,23 @@ namespace VarVarGamejam.Map
 
         public void StartTPSView()
         {
+            _isFps = true;
             _floor.GetComponent<MeshRenderer>().material = _floorMatSecond;
+        }
+
+        public void DisplayWallsTextsDefault()
+            => DisplayWallsTexts(_isFps);
+
+        public void DisplayWallsTexts(bool value)
+        {
+            foreach (var w in _walls)
+            {
+                var m = w.GetComponent<MeshRenderer>();
+                if (m != null)
+                {
+                    m.material = value ? _wallMat : _wallMatFirst;
+                }
+            }
         }
 
         private IEnumerator EnclosePlayer(List<AudioSource> sources, Vector2Int pos)
@@ -102,6 +123,7 @@ namespace VarVarGamejam.Map
                 if (_map[pos.y + dir.y][pos.x + dir.x] == TileType.Empty || _map[pos.y + dir.y][pos.x + dir.x] == TileType.EmptyTaken)
                 {
                     var w = Instantiate(_info.WallPrefab, new Vector3(pos.x + dir.x, .5f, pos.y + dir.y), Quaternion.identity);
+                    w.GetComponent<MeshRenderer>().material = _wallMat;
                     var s = w.GetComponent<AudioSource>();
                     s.clip = randAudio;
                     s.Play();
@@ -326,6 +348,11 @@ namespace VarVarGamejam.Map
             _walls.Add(Instantiate(_entranceHelp, new Vector3(entrance.Pos.x, .5f, entrance.Pos.y), Quaternion.identity));
             _walls.Add(Instantiate(_info.WallPrefab, new Vector3(entrance.Pos.x + entrance.Dir.x, .5f, entrance.Pos.y + entrance.Dir.y), Quaternion.identity));
             _walls.Add(Instantiate(_info.WallPrefab, new Vector3(exit.Pos.x + (firstTime ? exit.Dir.x : 0f), .5f, exit.Pos.y + (firstTime ? exit.Dir.y : 0f)), Quaternion.identity));
+        
+            if (_isFps)
+            {
+                DisplayWallsTexts(true);
+            }
         }
 
         private bool IsOutOfBounds(int y, int x, int size)
