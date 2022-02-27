@@ -49,15 +49,15 @@ public class CameraController : MonoBehaviour
         SwitchPriority((int)cameraMode);
     }
 
-    public void SetPlayerCamera(Transform player)
+    public void SetPlayerCamera(Transform player, Transform head)
     {
         cam2DPlayer.Follow = player;
         cam2DTop.Follow = player;
-        cam3DPlayer.Follow = player;
+        cam3DPlayer.Follow = head;
 
         cam2DPlayer.LookAt = player;
         cam2DTop.LookAt = player;
-        cam3DPlayer.LookAt = player;
+        cam3DPlayer.LookAt = head;
     }
 
     public Shake getCameraShake()

@@ -65,7 +65,7 @@ namespace VarVarGamejam.Player
             TabletManager.Instance.SetPlayerLight(_icon, gameObject, _torchlight);
 
             SwitchProfile(_topDownControls);
-            CameraController.Instance.SetPlayerCamera(this.transform);
+            CameraController.Instance.SetPlayerCamera(this.transform, _head);
             //_cameraShake = CameraController.Instance.getCameraShake();
         }
 
@@ -168,9 +168,9 @@ namespace VarVarGamejam.Player
         {
             _playerBehaviour?.Disable();
 
-            _tpsCamera.SetActive(false);
-            _topDownCamera.SetActive(false);
-            target.TargetCamera.SetActive(true);
+            //_tpsCamera.SetActive(false);
+            //_topDownCamera.SetActive(false);
+            //target.TargetCamera.SetActive(true);
             _playerBehaviour = target;
 
             _playerBehaviour.Enable();
