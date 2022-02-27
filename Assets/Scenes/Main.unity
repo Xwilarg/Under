@@ -1268,6 +1268,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c868e2a6e9993ff4a90bb8371eebc74c, type: 3}
   - {fileID: 8300000, guid: 68c46a58769a54940a72cb35d8eb6f32, type: 3}
   - {fileID: 8300000, guid: 62c1382de0a6c5c449bbf6394a0e8ca5, type: 3}
+  _floorMatFirst: {fileID: 2100000, guid: 5cb9351b7204a074b94e6790783d024a, type: 2}
+  _floorMatSecond: {fileID: 2100000, guid: 6a0e2fef23294254db79903a7a7ade6c, type: 2}
 --- !u!114 &1117414966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2243,6 +2245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcea0f5c741d68c4dae599d78e1038b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _info: {fileID: 11400000, guid: 0e4903270a07a924c88255cb83d16b19, type: 2}
 --- !u!1 &1890962556
 GameObject:
   m_ObjectHideFlags: 0

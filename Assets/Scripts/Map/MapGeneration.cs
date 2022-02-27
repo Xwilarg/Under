@@ -21,6 +21,9 @@ namespace VarVarGamejam.Map
         [SerializeField]
         private AudioClip[] _wallsAudio;
 
+        [SerializeField]
+        private Material _floorMatFirst, _floorMatSecond;
+
         private TileType[][] _map;
         private readonly List<GameObject> _walls = new();
 
@@ -33,6 +36,8 @@ namespace VarVarGamejam.Map
         private readonly Timer _trapTimer = new();
 
         public float Middle { get; private set; }
+
+        private GameObject _floor;
 
         private readonly List<Vector2Int> _allDirs = new()
         {
@@ -77,6 +82,11 @@ namespace VarVarGamejam.Map
         public void EnableBackwardPrevention()
         {
             _canGoBackward = false;
+        }
+
+        public void StartTPSView()
+        {
+            _floor.GetComponent<MeshRenderer>().material = _floorMatSecond;
         }
 
         private IEnumerator EnclosePlayer(List<AudioSource> sources, Vector2Int pos)
@@ -297,8 +307,9 @@ namespace VarVarGamejam.Map
 
                 // Spawn floor
                 var floorPos = Mathf.FloorToInt(_info.MapSize / 2f);
-                var floor = Instantiate(_info.FloorPrefab, new Vector3(floorPos, 0f, floorPos), Quaternion.identity);
-                floor.transform.localScale = new Vector3(_info.MapSize / 10f, 1f, _info.MapSize / 10f);
+                _floor = Instantiate(_info.FloorPrefab, new Vector3(floorPos, 0f, floorPos), Quaternion.identity);
+                _floor.transform.localScale = new Vector3(_info.MapSize / 10f, 1f, _info.MapSize / 10f);
+                _floor.GetComponent<MeshRenderer>().material = _floorMatFirst;
 
                 // Set minimap position
                 TabletManager.Instance.SetMinimapCamera(Middle, Middle, _info.MapSize / 2f);

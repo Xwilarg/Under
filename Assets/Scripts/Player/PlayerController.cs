@@ -139,6 +139,7 @@ namespace VarVarGamejam.Player
                     TogglePossibleGoalTake(true);
 
                     GoalManager.Instance.EnableBGM();
+                    MapGeneration.Instance.StartTPSView();
                 }
                 else if (!_isGoalInHands)
                 {

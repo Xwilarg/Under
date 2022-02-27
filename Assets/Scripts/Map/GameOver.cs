@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using VarVarGamejam.SO;
 
 namespace VarVarGamejam.Map
 {
@@ -11,6 +12,9 @@ namespace VarVarGamejam.Map
         {
             Instance = this;
         }
+
+        [SerializeField]
+        private GameInfo _info;
 
         private Image _fade;
         private AudioSource _deathAudio;
