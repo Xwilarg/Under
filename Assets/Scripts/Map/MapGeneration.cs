@@ -21,6 +21,9 @@ namespace VarVarGamejam.Map
         [SerializeField]
         private AudioClip[] _wallsAudio;
 
+        [SerializeField]
+        private Material _floorMatFirst, _floorMatSecond;
+
         private TileType[][] _map;
         private readonly List<GameObject> _walls = new();
 
@@ -33,6 +36,8 @@ namespace VarVarGamejam.Map
         private readonly Timer _trapTimer = new();
 
         public float Middle { get; private set; }
+
+        private GameObject _floor;
 
         private readonly List<Vector2Int> _allDirs = new()
         {
@@ -79,11 +84,15 @@ namespace VarVarGamejam.Map
             _canGoBackward = false;
         }
 
-        public IEnumerator Regenerate(Vector2Int pos)
+        public void StartTPSView()
+        {
+            _floor.GetComponent<MeshRenderer>().material = _floorMatSecond;
+        }
+
+        private IEnumerator EnclosePlayer(List<AudioSource> sources, Vector2Int pos)
         {
             var randAudio = _wallsAudio[Random.Range(0, _wallsAudio.Length)];
 
-            List<AudioSource> sources = new();
             // Add walls to prevent user to leave
             foreach (var dir in _allDirs)
             {
@@ -100,6 +109,18 @@ namespace VarVarGamejam.Map
 
             _trapTimer.Start(_info.TimerWall, goUp: true);
             yield return new WaitForSeconds(_info.TimerWall + _info.TimerWallRest);
+        }
+
+        public IEnumerator KillPlayer(Vector2Int pos) // Game over
+        {
+            List<AudioSource> sources = new();
+            yield return EnclosePlayer(sources, pos);
+        }
+
+        public IEnumerator Regenerate(Vector2Int pos)
+        {
+            List<AudioSource> sources = new();
+            yield return EnclosePlayer(sources, pos);
 
             _cache = null;
 
@@ -286,8 +307,9 @@ namespace VarVarGamejam.Map
 
                 // Spawn floor
                 var floorPos = Mathf.FloorToInt(_info.MapSize / 2f);
-                var floor = Instantiate(_info.FloorPrefab, new Vector3(floorPos, 0f, floorPos), Quaternion.identity);
-                floor.transform.localScale = new Vector3(_info.MapSize / 10f, 1f, _info.MapSize / 10f);
+                _floor = Instantiate(_info.FloorPrefab, new Vector3(floorPos, 0f, floorPos), Quaternion.identity);
+                _floor.transform.localScale = new Vector3(_info.MapSize / 10f, 1f, _info.MapSize / 10f);
+                _floor.GetComponent<MeshRenderer>().material = _floorMatFirst;
 
                 // Set minimap position
                 TabletManager.Instance.SetMinimapCamera(Middle, Middle, _info.MapSize / 2f);
