@@ -1,7 +1,5 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 using VarVarGamejam.Player;
 using VarVarGamejam.SO;
 
@@ -12,17 +10,7 @@ namespace VarVarGamejam.Map
         [SerializeField]
         private GameInfo _info;
 
-        [SerializeField]
-        private TMP_Text[] _text;
-
         private bool _victory;
-
-        private Image _fade;
-
-        private void Start()
-        {
-            _fade = GetComponent<Image>();
-        }
 
         private void OnTriggerEnter(Collider other)
         {
@@ -44,15 +32,15 @@ namespace VarVarGamejam.Map
                 return;
             }
 
-            var nextAlpha = _fade.color.a + Time.deltaTime * _info.GameoverFadeTime;
+            var nextAlpha = VictoryObjs.Instance.Fade.color.a + Time.deltaTime * _info.GameoverFadeTime;
             if (nextAlpha >= 1f)
             {
                 SceneManager.LoadScene("Menu");
             }
             else
             {
-                _fade.color = new Color(_fade.color.r, _fade.color.g, _fade.color.b, nextAlpha);
-                foreach (var text in _text)
+                VictoryObjs.Instance.Fade.color = new Color(VictoryObjs.Instance.Fade.color.r, VictoryObjs.Instance.Fade.color.g, VictoryObjs.Instance.Fade.color.b, nextAlpha);
+                foreach (var text in VictoryObjs.Instance.Texts)
                 {
                     text.color = new Color(text.color.r, text.color.g, text.color.b, nextAlpha);
                 }
