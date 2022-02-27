@@ -3,6 +3,11 @@
     "take": "Prendre",
 
     "openMap": "Ouvrir la carte",
+    "run": "Courir",
 
-    "runInstruction": "Fuis et ne reviens pas sur tes pas"
+    "runInstruction": "Fuis et ne reviens pas sur tes pas",
+
+    "entryText1": "Personne n'aime aller sous terre, mais c'est votre travail. Vous devez trouver et examiner les sources inconnues de radiation.",
+    "entryText2": "N'ayez pas peur de vous perdre - vous aurez un scanner et vous pouvez facilement retrouver votre chemin. Mais ne l'utilisez pas trop souvent ou vous risquez de tomber à cours de batterie.",
+    "entryText3": "Appuyez sur Espace pour continuer"
 }

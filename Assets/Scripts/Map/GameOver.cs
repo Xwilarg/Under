@@ -7,13 +7,6 @@ namespace VarVarGamejam.Map
 {
     public class GameOver : MonoBehaviour
     {
-        public static GameOver Instance { get; private set; }
-
-        private void Awake()
-        {
-            Instance = this;
-        }
-
         [SerializeField]
         private GameInfo _info;
 
@@ -37,11 +30,6 @@ namespace VarVarGamejam.Map
             {
                 _fade.color = new Color(_fade.color.r, _fade.color.g, _fade.color.b, nextAlpha);
             }
-        }
-
-        public void Loose()
-        {
-            _deathAudio.Play();
         }
     }
 }
