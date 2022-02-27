@@ -150,11 +150,14 @@ namespace VarVarGamejam.Player
             }
         }
 
+        public bool HaveGoalInHands => _isGoalInHands;
+
         private void OnTriggerExit(Collider other)
         {
-            if (other.CompareTag("Goal") && _isNearGoal)
+            if (other.CompareTag("Goal"))
             {
                 TogglePossibleGoalTake(false);
+                GoalManager.Instance.ToggleNextTakeHelp(false);
             }
         }
 
@@ -216,6 +219,7 @@ namespace VarVarGamejam.Player
             if (value.performed && !_isGoalInHands && _isNearGoal)
             {
                 TogglePossibleGoalTake(false);
+                GoalManager.Instance.ToggleNextTakeHelp(true);
                 _isGoalInHands = true;
                 GoalManager.Instance.TakeObjective();
                 _cameraShake.Launch(3f, .25f);

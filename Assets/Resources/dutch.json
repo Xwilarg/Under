@@ -1,0 +1,21 @@
+{
+    "play": "Spelen",
+    "take": "Oppakken",
+
+    "openMap": "Radar openen",
+    "run": "Rennen",
+
+    "runInstruction": "Ren weg en kom niet terug",
+
+    "entryText1": "Niemand gaat graag ondergronds, maar dit is jouw werk. Jij moet op zoek naar onbekende stralingsbronnen en deze onderzoeken.",
+    "entryText2": "Wees niet bang om te verdwalen - je hebt een radar om gemakkelijk je weg terug vinden. Maar gebruik het niet te vaak, de batterij kan leeg raken.",
+    "entryText3": "Druk op spatiebalk om door te gaan",
+
+    "endText1": "VEILIG",
+    "endText2": "Ben ik eruit? Wat? Nee.... Alweer....",
+
+    "tag1": "Help me hieruit",
+    "tag2": "Pas op",
+    "tag3": "Gevaar",
+    "tag4": "Nee"
+}

@@ -10,7 +10,7 @@ namespace VarVarGamejam.Menu
         public static GoalManager Instance { get; private set; }
 
         [SerializeField]
-        private GameObject _takeHelp, _mapHelp;
+        private GameObject _takeHelp, _nextTakeHelp, _mapHelp;
 
         [SerializeField]
         private RectTransform _timerBar;
@@ -19,7 +19,7 @@ namespace VarVarGamejam.Menu
         private GameInfo _info;
 
         [SerializeField]
-        private GameObject _audioGroup;
+        private GameObject _audioGroup, _lightAudio;
 
         [SerializeField]
         private GameOver _gameOver;
@@ -54,6 +54,20 @@ namespace VarVarGamejam.Menu
             _takeHelp.SetActive(value);
         }
 
+        public void ToggleNextTakeHelp(bool value)
+        {
+            if (value)
+            {
+                ToggleTakeHelp(false);
+                _nextTakeHelp.SetActive(true);
+            }
+            else
+            {
+                ToggleTakeHelp(false);
+                _nextTakeHelp.SetActive(false);
+            }
+        }
+
         public void TakeObjective()
         {
             ObjectiveObj.transform.parent.GetComponent<AudioSource>().Play();
@@ -70,6 +84,7 @@ namespace VarVarGamejam.Menu
         public void EnableBGM()
         {
             _audioGroup.SetActive(true);
+            _lightAudio.SetActive(false);
         }
     }
 }

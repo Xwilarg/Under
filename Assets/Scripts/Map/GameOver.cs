@@ -11,12 +11,10 @@ namespace VarVarGamejam.Map
         private GameInfo _info;
 
         private Image _fade;
-        private AudioSource _deathAudio;
 
         private void Start()
         {
             _fade = GetComponent<Image>();
-            _deathAudio = GetComponent<AudioSource>();
         }
 
         private void Update()

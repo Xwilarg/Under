@@ -16,7 +16,8 @@ namespace VarVarGamejam.Translation
             "russian",
             "chinese",
             "german",
-            "spanish"
+            "spanish",
+            "dutch"
         };
 
         private Translate()
@@ -49,7 +50,7 @@ namespace VarVarGamejam.Translation
             return _translationData["english"][key];
         }
 
-        private string _currentLanguage = "english";
+        private string _currentLanguage = "russian";
         public string CurrentLanguage
         {
             set
