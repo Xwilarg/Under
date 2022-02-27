@@ -79,11 +79,10 @@ namespace VarVarGamejam.Map
             _canGoBackward = false;
         }
 
-        public IEnumerator Regenerate(Vector2Int pos)
+        private IEnumerator EnclosePlayer(List<AudioSource> sources, Vector2Int pos)
         {
             var randAudio = _wallsAudio[Random.Range(0, _wallsAudio.Length)];
 
-            List<AudioSource> sources = new();
             // Add walls to prevent user to leave
             foreach (var dir in _allDirs)
             {
@@ -100,6 +99,18 @@ namespace VarVarGamejam.Map
 
             _trapTimer.Start(_info.TimerWall, goUp: true);
             yield return new WaitForSeconds(_info.TimerWall + _info.TimerWallRest);
+        }
+
+        public IEnumerator KillPlayer(Vector2Int pos) // Game over
+        {
+            List<AudioSource> sources = new();
+            yield return EnclosePlayer(sources, pos);
+        }
+
+        public IEnumerator Regenerate(Vector2Int pos)
+        {
+            List<AudioSource> sources = new();
+            yield return EnclosePlayer(sources, pos);
 
             _cache = null;
 

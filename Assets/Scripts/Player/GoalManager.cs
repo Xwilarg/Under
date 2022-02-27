@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using VarVarGamejam.Map;
+using VarVarGamejam.Player;
 using VarVarGamejam.SO;
 
 namespace VarVarGamejam.Menu
@@ -36,7 +38,8 @@ namespace VarVarGamejam.Menu
                 _timerBar.anchorMax = new Vector2(_gameTimer / _info.GameTimer, _timerBar.anchorMax.y);
                 if (_gameTimer <= 0f)
                 {
-                    Debug.Break(); // Game lost!
+                    PlayerController.Instance.Loose();
+                    GameOver.Instance.Loose();
                 }
             }
         }

@@ -59,6 +59,12 @@ namespace VarVarGamejam.Tablet
             _batteryLow = GetComponent<AudioSource>();
         }
 
+        public void ForceClose()
+        {
+            _tabletObj.SetActive(false);
+            _batteryLow.Stop();
+        }
+
         public void Toggle()
         {
             if (_remainingBattery > 0f)

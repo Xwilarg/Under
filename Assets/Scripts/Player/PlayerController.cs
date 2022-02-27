@@ -13,6 +13,13 @@ namespace VarVarGamejam.Player
 {
     public class PlayerController : MonoBehaviour
     {
+        public static PlayerController Instance { get; private set; }
+
+        private void Awake()
+        {
+            Instance = this;
+        }
+
         [SerializeField]
         private PlayerInfo _info;
         [SerializeField]
@@ -25,6 +32,8 @@ namespace VarVarGamejam.Player
         private Light _torchlight;
         [SerializeField]
         private SpriteRenderer _icon;
+
+        private bool _didLost = false;
 
         private List<AudioClip> _footstepsWalk, _footstepsRun;
 
@@ -59,6 +68,11 @@ namespace VarVarGamejam.Player
 
         private void FixedUpdate()
 		{
+            if (_didLost)
+            {
+                return;
+            }
+
             var pos = _playerBehaviour.Movement;
 			Vector3 desiredMove = transform.forward * pos.y + transform.right * pos.x;
 
@@ -152,6 +166,12 @@ namespace VarVarGamejam.Player
             _playerBehaviour = target;
 
             _playerBehaviour.Enable();
+        }
+
+        public void Loose()
+        {
+            TabletManager.Instance.ForceClose();
+            _didLost = true;
         }
 
 		public void OnMovement(InputAction.CallbackContext value)
