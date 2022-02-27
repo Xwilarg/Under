@@ -16,7 +16,8 @@ namespace VarVarGamejam.Translation
             "russian",
             "chinese",
             "german",
-            "spanish"
+            "spanish",
+            "dutch"
         };
 
         private Translate()
