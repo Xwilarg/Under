@@ -10,7 +10,7 @@ namespace VarVarGamejam.Menu
         public static GoalManager Instance { get; private set; }
 
         [SerializeField]
-        private GameObject _takeHelp, _mapHelp;
+        private GameObject _takeHelp, _nextTakeHelp, _mapHelp;
 
         [SerializeField]
         private RectTransform _timerBar;
@@ -52,6 +52,20 @@ namespace VarVarGamejam.Menu
         public void ToggleTakeHelp(bool value)
         {
             _takeHelp.SetActive(value);
+        }
+
+        public void ToggleNextTakeHelp(bool value)
+        {
+            if (value)
+            {
+                ToggleTakeHelp(false);
+                _nextTakeHelp.SetActive(true);
+            }
+            else
+            {
+                ToggleTakeHelp(false);
+                _nextTakeHelp.SetActive(false);
+            }
         }
 
         public void TakeObjective()
